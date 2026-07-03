@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Defending the Modern Supply Chain — Workshop Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+ 
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --border: #232736;
+    --accent: #5b8aff;
+    --accent-dim: rgba(91,138,255,0.12);
+    --warn: #ff6b35;
+    --warn-dim: rgba(255,107,53,0.12);
+    --green: #3dd68c;
+    --green-dim: rgba(61,214,140,0.1);
+    --text: #e2e6f0;
+    --muted: #7a8099;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+ 
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 40px 24px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+  }
+ 
+  .header-left .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+ 
+  header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+    max-width: 480px;
+  }
+ 
+  .header-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+ 
+  .event-tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+ 
+  .hosts {
+    font-size: 13px;
+    color: var(--muted);
+  }
+ 
+  /* PROGRESS TIMELINE */
+  .timeline {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+ 
+  .phase {
+    flex: 1;
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+ 
+  .phase:last-child { border-right: none; }
+  .phase:hover { background: rgba(255,255,255,0.025); }
+  .phase.active { background: var(--accent-dim); }
+  .phase.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+ 
+  .phase-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+ 
+  .phase.active .phase-label { color: var(--accent); }
+ 
+  .phase-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+ 
+  .phase-duration {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+ 
+  /* MAIN LAYOUT */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    min-height: calc(100vh - 130px);
+  }
+ 
+  .content {
+    padding: 32px 40px;
+    border-right: 1px solid var(--border);
+  }
+ 
+  .sidebar {
+    padding: 24px 20px;
+  }
+ 
+  /* SECTION PANELS */
+  .panel {
+    display: none;
+  }
+ 
+  .panel.active {
+    display: block;
+  }
+ 
+  .panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+ 
+  .panel-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+ 
+  .icon-warn { background: var(--warn-dim); }
+  .icon-blue { background: var(--accent-dim); }
+  .icon-green { background: var(--green-dim); }
+  .icon-muted { background: rgba(122,128,153,0.12); }
+ 
+  .panel-heading h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+  }
+ 
+  .panel-heading .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+ 
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; gap: 16px; }
+ 
+  .step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+ 
+  .step-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+ 
+  .step.done .step-num {
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+  }
+ 
+  .step-body {}
+  .step-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+ 
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+ 
+  /* CODE BLOCKS */
+  .code-block {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #b8c5e8;
+    line-height: 1.6;
+    margin: 10px 0;
+    overflow-x: auto;
+    position: relative;
+  }
+ 
+  .code-block .comment { color: #3d4a6b; }
+  .code-block .kw { color: var(--accent); }
+  .code-block .str { color: var(--green); }
+  .code-block .cmd { color: var(--warn); }
+ 
+  .copy-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+ 
+  .copy-btn:hover { color: var(--text); border-color: #3a4060; }
+  .copy-btn.copied { color: var(--green); border-color: var(--green); }
+ 
+  /* REPO CARDS */
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+ 
+  .repo-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    position: relative;
+  }
+ 
+  .repo-card:hover { border-color: #3a4060; background: rgba(255,255,255,0.02); }
+  .repo-card.selected { border-color: var(--accent); background: var(--accent-dim); }
+ 
+  .repo-badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+ 
+  .badge-js { background: rgba(240,219,79,0.15); color: #f0db4f; }
+  .badge-py { background: rgba(70,140,190,0.15); color: #4699c0; }
+  .badge-java { background: rgba(234,67,53,0.15); color: #ea4335; }
+ 
+  .repo-name {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+ 
+  .repo-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+ 
+  .repo-vulns {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+ 
+  .vuln-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--warn-dim);
+    color: var(--warn);
+    border: 1px solid rgba(255,107,53,0.2);
+  }
+ 
+  /* CHECKLIST */
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+ 
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+  }
+ 
+  .check-item:hover { border-color: var(--border); background: rgba(255,255,255,0.02); }
+ 
+  .check-item input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: var(--green);
+    flex-shrink: 0;
+    margin-top: 1px;
+    cursor: pointer;
+  }
+ 
+  .check-item.checked { color: var(--muted); text-decoration: line-through; }
+ 
+  /* SIDEBAR WIDGETS */
+  .sidebar-widget {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+ 
+  .widget-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+ 
+  .scan-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 5px;
+    background: rgba(255,107,53,0.08);
+    border: 1px solid rgba(255,107,53,0.2);
+    margin-bottom: 8px;
+  }
+ 
+  .scan-status.pass {
+    background: var(--green-dim);
+    border-color: rgba(61,214,140,0.2);
+  }
+ 
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--warn);
+    flex-shrink: 0;
+  }
+ 
+  .scan-status.pass .status-dot { background: var(--green); }
+ 
+  .status-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+  }
+ 
+  .scan-status .status-label { color: var(--warn); }
+  .scan-status.pass .status-label { color: var(--green); }
+ 
+  .scan-btn {
+    width: 100%;
+    padding: 9px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.15s;
+  }
+ 
+  .scan-btn:hover { opacity: 0.85; }
+  .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+ 
+  .progress-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 10px 0 6px;
+    overflow: hidden;
+  }
+ 
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+ 
+  .progress-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+  }
+ 
+  /* LEADERBOARD */
+  .leaderboard-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+ 
+  .leaderboard-row:last-child { border-bottom: none; }
+ 
+  .rank {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    width: 20px;
+    flex-shrink: 0;
+  }
+ 
+  .rank.gold { color: #f0c040; }
+  .rank.silver { color: #b0b8cc; }
+  .rank.bronze { color: #c08050; }
+ 
+  .lb-name { flex: 1; color: var(--text); }
+  .lb-time { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .lb-badge { font-size: 14px; }
+ 
+  /* ALERT CALLOUT */
+  .callout {
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    font-size: 13px;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+ 
+  .callout.warn {
+    background: var(--warn-dim);
+    border: 1px solid rgba(255,107,53,0.25);
+    color: #ffb89a;
+  }
+ 
+  .callout.info {
+    background: var(--accent-dim);
+    border: 1px solid rgba(91,138,255,0.2);
+    color: #a8c0ff;
+  }
+ 
+  .callout.success {
+    background: var(--green-dim);
+    border: 1px solid rgba(61,214,140,0.2);
+    color: #8fe8b4;
+  }
+ 
+  .callout-icon { font-size: 16px; flex-shrink: 0; }
+ 
+  /* NAV BUTTONS */
+  .nav-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+ 
+  .btn {
+    padding: 9px 18px;
+    border-radius: 5px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+  }
+ 
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+ 
+  .btn-primary:hover { opacity: 0.85; }
+ 
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+  }
+ 
+  .btn-ghost:hover { border-color: #3a4060; color: var(--text); }
+ 
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+ 
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+ 
+  p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+ 
+  @media (max-width: 900px) {
+    .main { grid-template-columns: 1fr; }
+    .sidebar { border-top: 1px solid var(--border); }
+    .repo-grid { grid-template-columns: 1fr; }
+    header { flex-direction: column; }
+    .header-right { text-align: left; }
+  }
+</style>
+</head>
+<body>
+ 
+<header>
+  <div class="header-left">
+    <div class="eyebrow">WeAreDevelopers World Congress · Berlin · July 2025</div>
+    <h1>Defending the Modern Supply Chain:<br>Hands-On Vulnerability Remediation</h1>
+  </div>
+  <div class="header-right">
+    <div class="event-tag">Booth A_60 · Workshop Track</div>
+    <div class="hosts" style="margin-top:6px">Patrick Feige &amp; Boy Baukema · <span style="color:#5b8aff">Veracode</span></div>
+  </div>
+</header>
+ 
+<div class="timeline">
+  <div class="phase active" onclick="showPhase(0)">
+    <div class="phase-label">Act 1</div>
+    <div class="phase-title">The Exploit</div>
+    <div class="phase-duration">15 min · Demo</div>
+  </div>
+  <div class="phase" onclick="showPhase(1)">
+    <div class="phase-label">Act 2</div>
+    <div class="phase-title">Hands-On Fix</div>
+    <div class="phase-duration">50 min · Exercise</div>
+  </div>
+  <div class="phase" onclick="showPhase(2)">
+    <div class="phase-label">Act 3</div>
+    <div class="phase-title">Q&amp;A</div>
+    <div class="phase-duration">25 min · Discussion</div>
+  </div>
+  <div class="phase" onclick="showPhase(3)">
+    <div class="phase-label">Resources</div>
+    <div class="phase-title">Take-Aways</div>
+    <div class="phase-duration">Keep &amp; share</div>
+  </div>
+</div>
+ 
+<div class="main">
+  <div class="content">
+ 
+    <!-- PANEL 0: THE EXPLOIT -->
+    <div class="panel active" id="panel-0">
+      <div class="panel-heading">
+        <div class="panel-icon icon-warn">⚡</div>
+        <div>
+          <h2>The Exploit — Live Demo</h2>
+          <div class="subtitle">Watch how a malicious package enters a supply chain undetected</div>
+        </div>
+      </div>
+ 
+      <div class="callout warn">
+        <span class="callout-icon">⚠</span>
+        <span>This is a <strong>controlled demo</strong> using packages registered in the Veracode Package Firewall sandbox. Do not reproduce outside of this environment.</span>
+      </div>
+ 
+      <p>Modern applications pull in hundreds of open-source packages. Most are legitimate. Some aren't. The attacker's goal is simple: get a malicious dependency into your build pipeline before anyone notices.</p>
+ 
+      <h3>What you're about to see</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Normal app, running clean</div>
+            <div class="step-desc">The demo app boots and serves requests as expected. No alerts, no warnings.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Malicious package introduced</div>
+            <div class="step-desc">A dependency is added to <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">package.json</code> — a realistic typosquat that mimics a legitimate utility package.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Commit → Push → CI triggers</div>
+            <div class="step-desc">Without a firewall, this goes straight into the build. With Veracode Package Firewall, the install is blocked before it reaches your environment.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">The block in the Veracode UI</div>
+            <div class="step-desc">Real-time alert: package name, risk reason, and which repo triggered it. This is what the Package Firewall policy catches.</div>
+          </div>
+        </div>
+      </div>
+ 
+      <hr class="divider">
+ 
+      <h3>The malicious packages (Firewall demo registry)</h3>
+      <p style="margin-bottom:14px">These are pre-configured in the workshop's Package Firewall policy across six ecosystems:</p>
+ 
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px">
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">MAVEN</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">com.veracode.firewall:<br>firewall-demo</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">NPM</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">@veracode/<br>firewall-demo</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">PYPI</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">CARGO</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">GOLANG</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">github.com/veracode/<br>firewall-demo-go</div>
+        </div>
+        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">RUBYGEMS</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
+        </div>
+      </div>
+ 
+      <div class="nav-row">
+        <button class="btn btn-primary" onclick="showPhase(1)">Next → Hands-On Exercise</button>
+      </div>
+    </div>
+ 
+    <!-- PANEL 1: HANDS-ON -->
+    <div class="panel" id="panel-1">
+      <div class="panel-heading">
+        <div class="panel-icon icon-blue">🔧</div>
+        <div>
+          <h2>Hands-On: Fix It</h2>
+          <div class="subtitle">Pick a repo, find the vulns, fix them, re-scan to validate</div>
+        </div>
+      </div>
+ 
+      <div class="callout info">
+        <span class="callout-icon">ℹ</span>
+        <span>You get your own isolated fork via <strong>GitHub Classroom</strong> — nobody else touches your repo. Validation uses <strong>free OSS scanners</strong> (npm audit / pip-audit / OWASP Dependency-Check) running in GitHub Actions. No Veracode account needed for the exercise.</span>
+      </div>
+ 
+      <h3 style="margin-bottom:10px">Step 1 — Accept your Classroom assignment</h3>
+      <p style="margin-bottom:12px">Click the link for your ecosystem below. GitHub Classroom creates a private fork just for you in under 30 seconds — named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]-[your-username]</code>. Nobody else can push to it.</p>
+ 
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+        <a href="#" onclick="selectRepo('js');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:26px;margin-bottom:6px">📦</div>
+          <div class="repo-badge badge-js" style="display:block;text-align:center;margin-bottom:8px">JavaScript</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-js</div>
+        </a>
+        <a href="#" onclick="selectRepo('py');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:26px;margin-bottom:6px">🐍</div>
+          <div class="repo-badge badge-py" style="display:block;text-align:center;margin-bottom:8px">Python</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-py</div>
+        </a>
+        <a href="#" onclick="selectRepo('java');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="font-size:26px;margin-bottom:6px">☕</div>
+          <div class="repo-badge badge-java" style="display:block;text-align:center;margin-bottom:8px">Java</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-java</div>
+        </a>
+      </div>
+ 
+      <hr class="divider">
+ 
+      <h3 style="margin-bottom:8px">Step 2 — Choose your ecosystem (updates instructions below)</h3>
+      <p>Select which repo you accepted so the rest of the guide updates for your language.</p>
+ 
+      <div class="repo-grid">
+        <div class="repo-card" id="repo-js" onclick="selectRepo('js')">
+          <div class="repo-badge badge-js">JavaScript</div>
+          <div class="repo-name">verademo-javascript-api</div>
+          <div class="repo-desc">Node/Express REST API for the Blab-a-Gag demo app. Intentionally vulnerable npm dependencies.</div>
+          <div class="repo-vulns">
+            <span class="vuln-tag">injection</span>
+            <span class="vuln-tag">broken auth</span>
+            <span class="vuln-tag">SCA findings</span>
+          </div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+        </div>
+        <div class="repo-card" id="repo-py" onclick="selectRepo('py')">
+          <div class="repo-badge badge-py">Python</div>
+          <div class="repo-name">verademo-python</div>
+          <div class="repo-desc">Django forum app (Blab-a-Gag). Vulnerable requirements.txt with known CVEs in pinned deps.</div>
+          <div class="repo-vulns">
+            <span class="vuln-tag">SQLi</span>
+            <span class="vuln-tag">XSS</span>
+            <span class="vuln-tag">SCA findings</span>
+          </div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+        </div>
+        <div class="repo-card" id="repo-java" onclick="selectRepo('java')">
+          <div class="repo-badge badge-java">Java</div>
+          <div class="repo-name">verademo-java</div>
+          <div class="repo-desc">Spring/Maven web app. Well-documented exploits, DEMO_NOTES included. Docker-ready.</div>
+          <div class="repo-vulns">
+            <span class="vuln-tag">deserialization</span>
+            <span class="vuln-tag">SQLi</span>
+            <span class="vuln-tag">SCA findings</span>
+          </div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+        </div>
+      </div>
+ 
+      <div id="repo-instructions" style="display:none">
+        <hr class="divider">
+        <h3 style="margin-bottom:14px">Step 3 — Open your Codespace</h3>
+        <p style="margin-bottom:10px">After accepting the Classroom assignment, open your fork in a browser-based VS Code. No install needed — the environment is pre-configured.</p>
+        <div class="code-block" id="codespace-link" style="font-size:13px;padding-right:60px">
+          <button class="copy-btn" onclick="copyCode(this)">copy</button>
+          <span id="codespace-url">https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-javascript-api&ref=participant-start</span>
+        </div>
+        <div class="callout info" style="margin-top:12px">
+          <span class="callout-icon">ℹ</span>
+          <span>The Codespace opens on the <strong>participant-start</strong> branch — the intentionally vulnerable version. The <code style="font-family:var(--mono);font-size:12px">main</code> branch has the fixed reference — avoid it until after the exercise.</span>
+        </div>
+ 
+        <hr class="divider">
+        <h3 style="margin-bottom:6px">Step 4 — Read the pre-loaded scan results</h3>
+        <p style="margin-bottom:10px">A scan has already been run for you. Open <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">SCAN-RESULTS.md</code> in the root of the repo. It lists every Critical and High finding with CVE IDs and the affected dependency version.</p>
+ 
+        <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
+          <span style="color:#3d4a6b">## SCAN-RESULTS.md (example — JS repo)</span><br><br>
+          <span style="color:var(--warn)">CRITICAL</span> · CVE-2021-23337 · <span style="color:#fff">lodash 4.17.20</span><br>
+          <span style="color:#3d4a6b">  Command injection via _.template(). Fix: bump to 4.17.21</span><br><br>
+          <span style="color:var(--warn)">HIGH</span> &nbsp;&nbsp;&nbsp;· CVE-2023-45857 · <span style="color:#fff">axios 0.21.1</span><br>
+          <span style="color:#3d4a6b">  CSRF via forged headers. Fix: bump to 1.6.0</span><br><br>
+          <span style="color:var(--warn)">HIGH</span> &nbsp;&nbsp;&nbsp;· CVE-2021-44906 · <span style="color:#fff">minimist 1.2.5</span><br>
+          <span style="color:#3d4a6b">  Prototype pollution. Fix: bump to 1.2.6</span><br><br>
+          <span style="color:#ff6b35;opacity:0.6">MALICIOUS</span> · <span style="color:#fff">@veracode/firewall-demo 1.0.0</span><br>
+          <span style="color:#3d4a6b">  🎯 Bonus: remove this entirely</span>
+        </div>
+ 
+        <hr class="divider">
+        <h3 style="margin-bottom:10px">Step 5 — Fix without breaking</h3>
+        <p style="margin-bottom:12px">Edit only the dependency manifest. The app must still pass its test suite after your changes.</p>
+ 
+        <div id="fix-checklist-wrap">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em">Your manifest file</div>
+            <div id="manifest-pill" style="font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:3px;background:var(--accent-dim);color:var(--accent);border:1px solid rgba(91,138,255,0.2)">package.json</div>
+          </div>
+ 
+          <div class="checklist" id="fix-checklist">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Open <code style="font-family:var(--mono);font-size:11px;color:var(--accent)" id="manifest-inline">package.json</code> and find the vulnerable versions from SCAN-RESULTS.md
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Bump each dep to the safe version listed — do not change the rest
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Save the file and run the test suite in the terminal
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Confirm tests pass — no regressions
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Commit and push — this triggers the Actions scan
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> 🎯 Bonus: remove the malicious package entirely and push again
+            </label>
+          </div>
+        </div>
+ 
+        <div class="code-block" style="margin-top:14px">
+          <button class="copy-btn" onclick="copyCode(this)">copy</button>
+          <span class="comment"># Run tests (check README for exact command)</span><br>
+          <span class="cmd">npm test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># JS (verademo-javascript-api)</span><br>
+          <span class="cmd">python manage.py test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Python (verademo-python / Django)</span><br>
+          <span class="cmd">mvn test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Java (verademo-java / Maven)</span><br><br>
+          <span class="comment"># Commit and push to trigger the scan</span><br>
+          <span class="cmd">git add</span> <span class="str">.</span> &amp;&amp; <span class="cmd">git commit</span> -m <span class="str">"fix: remediate critical CVEs"</span><br>
+          <span class="cmd">git push</span>
+        </div>
+ 
+        <hr class="divider">
+        <h3 style="margin-bottom:10px">Step 6 — Push and watch the scan</h3>
+        <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically — no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
+ 
+        <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
+          <span style="color:#3d4a6b"># What runs in Actions per ecosystem</span><br><br>
+          <span style="color:var(--accent)">[JS]</span> &nbsp;&nbsp; npm audit --audit-level=high<br>
+          <span style="color:var(--accent)">[PY]</span> &nbsp;&nbsp; pip-audit -r requirements.txt<br>
+          <span style="color:var(--accent)">[Java]</span> mvn dependency-check:check -DfailBuildOnCVSS=7
+        </div>
+ 
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
+          <div style="border:1px solid var(--border);border-radius:6px;padding:12px 14px">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Still failing ❌</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log — a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 5.</div>
+          </div>
+          <div style="border:1px solid rgba(61,214,140,0.2);border-radius:6px;padding:12px 14px;background:var(--green-dim)">
+            <div style="font-family:var(--mono);font-size:10px;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">All clear ✅</div>
+            <div style="font-size:12px;color:#8fe8b4;line-height:1.6">Zero Critical/High findings. Raise your hand — you're on the leaderboard.</div>
+          </div>
+        </div>
+ 
+        <div class="callout warn">
+          <span class="callout-icon">⚠</span>
+          <span>If you see findings you didn't expect, check for <strong>transitive dependencies</strong> — a package you kept may pull in a vulnerable version indirectly. Look at the full audit output, not just the top-level deps.</span>
+        </div>
+ 
+        <hr class="divider">
+        <h3 style="margin-bottom:10px">The Veracode moment</h3>
+        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector — showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
+        <div class="callout success">
+          <span class="callout-icon">✓</span>
+          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em> — reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
+        </div>
+      </div>
+ 
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="showPhase(0)">← Back</button>
+        <button class="btn btn-primary" onclick="showPhase(2)">Next → Q&amp;A</button>
+      </div>
+    </div>
+ 
+    <!-- PANEL 2: Q&A -->
+    <div class="panel" id="panel-2">
+      <div class="panel-heading">
+        <div class="panel-icon icon-green">💬</div>
+        <div>
+          <h2>Q&amp;A + Best Practices</h2>
+          <div class="subtitle">Open discussion — Boy Baukema leads</div>
+        </div>
+      </div>
+ 
+      <p>No slides. Bring your questions from the exercise. We'll work through real scenarios.</p>
+ 
+      <hr class="divider">
+ 
+      <h3>Discussion topics we'll cover</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">①</div>
+          <div class="step-body">
+            <div class="step-title">Where does SCA stop and the Package Firewall begin?</div>
+            <div class="step-desc">SCA tells you what's vulnerable. The Package Firewall stops malicious packages before they're ever installed. They're complementary, not competing.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">②</div>
+          <div class="step-body">
+            <div class="step-title">Blocking vs. alerting — what's right for your pipeline?</div>
+            <div class="step-desc">Hard blocks in CI slow dev teams. Alerting without action creates noise. How do you find the right policy for your risk tolerance?</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">③</div>
+          <div class="step-body">
+            <div class="step-title">Breaking changes when remediating — how do you manage this?</div>
+            <div class="step-desc">Major version bumps break APIs. Strategies: test coverage first, pin transitives, use Veracode Fix for automated suggestions.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">④</div>
+          <div class="step-body">
+            <div class="step-title">Where to go from here</div>
+            <div class="step-desc">Developer-first security: IDE plugins, pre-commit hooks, SCA in PR comments. Security that gets out of the developer's way.</div>
+          </div>
+        </div>
+      </div>
+ 
+      <hr class="divider">
+ 
+      <div class="callout success">
+        <span class="callout-icon">✓</span>
+        <span>Thanks for joining! Scan the QR code at the booth for a link to all resources, the repos, and a recording of Act 1.</span>
+      </div>
+ 
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="showPhase(1)">← Back</button>
+        <button class="btn btn-primary" onclick="showPhase(3)">→ Take-Aways</button>
+      </div>
+    </div>
+ 
+    <!-- PANEL 3: RESOURCES -->
+    <div class="panel" id="panel-3">
+      <div class="panel-heading">
+        <div class="panel-icon icon-muted">📦</div>
+        <div>
+          <h2>Take-Aways</h2>
+          <div class="subtitle">Links, tools, and next steps</div>
+        </div>
+      </div>
+ 
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+        <div class="sidebar-widget" style="margin:0">
+          <div class="widget-title">Workshop Repos</div>
+          <div style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--text)">
+            github.com/veracode-demo-labs/<br>
+            ├── verademo-javascript-api<br>
+            ├── verademo-python<br>
+            └── verademo-java
+          </div>
+        </div>
+        <div class="sidebar-widget" style="margin:0">
+          <div class="widget-title">Veracode Docs</div>
+          <div style="font-size:13px;line-height:1.9;color:var(--text)">
+            <a href="https://docs.veracode.com" style="color:var(--accent);text-decoration:none">docs.veracode.com</a><br>
+            SCA Agent-Based Scanning<br>
+            Package Firewall Policy Guide<br>
+            Pipeline Scan CLI Reference
+          </div>
+        </div>
+      </div>
+ 
+      <h3>Key concepts from today</h3>
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
+          <div class="step-body">
+            <div class="step-title">SCA is not optional</div>
+            <div class="step-desc">Your app is 80%+ open-source code by dependency count. You own the risk from every package you import, whether you wrote it or not.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">⊕</div>
+          <div class="step-body">
+            <div class="step-title">Shift left, not shift all responsibility left</div>
+            <div class="step-desc">Put SCA in the IDE and the PR, but back it up with pipeline policy. Developers need guardrails, not gates.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--green-dim);border-color:var(--green);color:var(--green)">✓</div>
+          <div class="step-body">
+            <div class="step-title">Remediation is the end goal, not detection</div>
+            <div class="step-desc">A long vuln backlog isn't a security program. Prioritise by reachability, fix by version bump where possible, track progress over time.</div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="showPhase(2)">← Back</button>
+      </div>
+    </div>
+ 
+  </div>
+ 
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+ 
+    <div class="sidebar-widget">
+      <div class="widget-title">Your Progress</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:25%"></div>
+      </div>
+      <div class="progress-label" id="progress-label">Act 1 of 4</div>
+    </div>
+ 
+    <div class="sidebar-widget" id="scan-widget" style="display:none">
+      <div class="widget-title">Scan Status</div>
+      <div class="scan-status" id="scan-status-box">
+        <div class="status-dot"></div>
+        <span class="status-label">VULNERABLE</span>
+        <span style="font-size:12px;color:var(--muted);margin-left:auto" id="scan-count">awaiting push</span>
+      </div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6">
+        OSS scanner runs on push — no Veracode account needed.<br>Check the <strong style="color:var(--text)">Actions</strong> tab in your fork.<br><br>
+        <span style="color:var(--accent)">JS &nbsp;&nbsp;</span> npm audit<br>
+        <span style="color:var(--accent)">PY &nbsp;&nbsp;</span> pip-audit<br>
+        <span style="color:var(--accent)">Java </span> dependency-check
+      </div>
+    </div>
+ 
+    <div class="sidebar-widget">
+      <div class="widget-title">Leaderboard</div>
+      <div class="leaderboard-row">
+        <div class="rank gold">1</div>
+        <div class="lb-name">waiting...</div>
+        <div class="lb-badge">🥇</div>
+      </div>
+      <div class="leaderboard-row">
+        <div class="rank silver">2</div>
+        <div class="lb-name">—</div>
+      </div>
+      <div class="leaderboard-row">
+        <div class="rank bronze">3</div>
+        <div class="lb-name">—</div>
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">First to green scan + passing tests wins. Bonus: identify the malicious package from Act 1.</div>
+    </div>
+ 
+    <div class="sidebar-widget">
+      <div class="widget-title">Need Help?</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.7">
+        🙋 Raise your hand<br>
+        💬 Slack: <span style="font-family:var(--mono);color:var(--accent)">#wad-workshop</span><br>
+        📖 Hint sheet: row A handout
+      </div>
+    </div>
+ 
+  </div>
+</div>
+ 
+<script>
+  let currentPhase = 0;
+  const progressLabels = ['Act 1 of 4', 'Act 2 of 4', 'Act 3 of 4', 'Resources'];
+  const progressWidths = ['25%', '50%', '75%', '100%'];
+ 
+  function showPhase(n) {
+    // Update timeline
+    document.querySelectorAll('.phase').forEach((p, i) => {
+      p.classList.toggle('active', i === n);
+    });
+ 
+    // Update panels
+    document.querySelectorAll('.panel').forEach((p, i) => {
+      p.classList.toggle('active', i === n);
+    });
+ 
+    // Progress
+    document.getElementById('progress-fill').style.width = progressWidths[n];
+    document.getElementById('progress-label').textContent = progressLabels[n];
+ 
+    // Show scan widget during exercise
+    document.getElementById('scan-widget').style.display = (n === 1) ? 'block' : 'none';
+ 
+    currentPhase = n;
+  }
+ 
+  function selectRepo(type) {
+    document.querySelectorAll('.repo-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('repo-' + type).classList.add('selected');
+ 
+    const urls = {
+      js:   'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-javascript-api&ref=participant-start',
+      py:   'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-python&ref=participant-start',
+      java: 'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-java&ref=participant-start'
+    };
+ 
+    const manifests = {
+      js:   'package.json',
+      py:   'requirements.txt',
+      java: 'pom.xml'
+    };
+ 
+    document.getElementById('codespace-url').textContent = urls[type];
+    document.getElementById('manifest-pill').textContent = manifests[type];
+    document.getElementById('manifest-inline').textContent = manifests[type];
+    document.getElementById('repo-instructions').style.display = 'block';
+    document.getElementById('repo-instructions').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+ 
+  function toggleCheck(label) {
+    setTimeout(() => {
+      label.classList.toggle('checked', label.querySelector('input').checked);
+    }, 10);
+  }
+ 
+  let scanRun = false;
+  function simulateScan() {
+    const btn = document.getElementById('rescan-btn');
+    btn.textContent = 'Scanning...';
+    btn.disabled = true;
+ 
+    setTimeout(() => {
+      if (!scanRun) {
+        // First scan - still vulnerable
+        document.getElementById('scan-count').textContent = '8 findings';
+        btn.textContent = 'Re-Scan';
+        btn.disabled = false;
+        scanRun = true;
+      } else {
+        // Second scan - clean
+        const box = document.getElementById('scan-status-box');
+        box.classList.add('pass');
+        box.querySelector('.status-dot').style.background = 'var(--green)';
+        box.querySelector('.status-label').textContent = 'CLEAN';
+        document.getElementById('scan-count').textContent = '0 critical';
+        btn.textContent = '✓ Scan Complete';
+        btn.disabled = true;
+      }
+    }, 2200);
+  }
+ 
+  function copyCode(btn) {
+    const block = btn.parentElement;
+    const text = block.innerText.replace('copy', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'copy';
+        btn.classList.remove('copied');
+      }, 1800);
+    });
+  }
+</script>
+ 
+</body>
+</html>
+ 
