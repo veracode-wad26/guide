@@ -1046,22 +1046,29 @@
  
     <div class="sidebar-widget">
       <div class="widget-title">Leaderboard</div>
-      <div class="leaderboard-row">
-        <div class="rank gold">1</div>
-        <div class="lb-name">waiting...</div>
-        <div class="lb-badge">🥇</div>
-      </div>
-      <div class="leaderboard-row">
-        <div class="rank silver">2</div>
-        <div class="lb-name">—</div>
-      </div>
-      <div class="leaderboard-row">
-        <div class="rank bronze">3</div>
-        <div class="lb-name">—</div>
+      <div id="leaderboard-container">
+        <div class="leaderboard-row">
+          <div class="rank gold">1</div>
+          <div class="lb-name">loading...</div>
+          <div class="lb-badge">🥇</div>
+        </div>
       </div>
       <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">First to green scan + passing tests wins. Bonus: identify the malicious package from Act 1.</div>
     </div>
  
+    <div class="sidebar-widget">
+      <div class="widget-title">Your Alias</div>
+      <input type="text" id="username-input" placeholder="GitHub username"
+        style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text);font-family:var(--mono);font-size:12px;margin-bottom:8px"
+        oninput="updateAlias()">
+      <div id="alias-display" style="font-family:var(--mono);font-size:13px;color:var(--accent);padding:8px 10px;border-radius:5px;background:var(--accent-dim);border:1px solid rgba(91,138,255,0.2);text-align:center;display:none">
+        —
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5;text-align:center">
+        Enter your GitHub username to see your leaderboard alias
+      </div>
+    </div>
+
     <div class="sidebar-widget">
       <div class="widget-title">Need Help?</div>
       <div style="font-size:13px;color:var(--muted);line-height:1.7">
@@ -1167,6 +1174,101 @@
       }, 1800);
     });
   }
+
+  // Fetch and display leaderboard from GitHub Pages
+  async function loadLeaderboard() {
+    try {
+      const response = await fetch('/leaderboard/leaderboard.json');
+      const data = await response.json();
+
+      const container = document.getElementById('leaderboard-container');
+      const leaderboard = data.leaderboard || [];
+
+      if (leaderboard.length === 0) {
+        container.innerHTML = `
+          <div class="leaderboard-row">
+            <div class="rank">–</div>
+            <div class="lb-name">awaiting first submission...</div>
+          </div>
+        `;
+        return;
+      }
+
+      // Show top 3
+      const top3 = leaderboard.slice(0, 3);
+      const medals = ['🥇', '🥈', '🥉'];
+      const rankClasses = ['gold', 'silver', 'bronze'];
+
+      container.innerHTML = top3.map((entry, i) => `
+        <div class="leaderboard-row">
+          <div class="rank ${rankClasses[i]}">${entry.rank}</div>
+          <div class="lb-name" title="${entry.participant_alias} (${entry.repo})">${entry.participant_alias}</div>
+          <div class="lb-badge">${medals[i]}</div>
+        </div>
+      `).join('');
+
+    } catch (error) {
+      console.error('Failed to load leaderboard:', error);
+      document.getElementById('leaderboard-container').innerHTML = `
+        <div class="leaderboard-row">
+          <div class="rank">–</div>
+          <div class="lb-name" style="color:var(--muted)">leaderboard unavailable</div>
+        </div>
+      `;
+    }
+  }
+
+  // Generate alias from username
+  const ADJECTIVES = [
+    'caffeinated', 'clever', 'bold', 'swift', 'paranoid', 'hashed', 'patched',
+    'verified', 'compiled', 'quantum', 'legendary', 'cosmic', 'ethereal',
+    'fearless', 'valiant', 'reckless', 'dashing', 'mighty', 'keen', 'fierce',
+    'brilliant', 'vivid', 'noble', 'wild', 'sharp', 'quick', 'bright',
+    'agile', 'robust', 'sleek', 'vigilant', 'dynamic', 'precise',
+  ];
+
+  const NOUNS = [
+    'phoenix', 'dragon', 'fortress', 'sentinel', 'guardian', 'beacon', 'artifact',
+    'package', 'monitor', 'auditor', 'watchtower', 'vault', 'cipher', 'shield',
+    'armor', 'knight', 'warrior', 'oracle', 'prophet', 'champion',
+    'protector', 'warden', 'steward', 'curator', 'keeper', 'defender', 'ally',
+    'companion', 'partner', 'agent',
+  ];
+
+  async function generateAlias(username) {
+    // Use SHA256 hash to match Python script
+    const encoded = new TextEncoder().encode(username.toLowerCase());
+    const hashBuffer = await crypto.subtle.digest('SHA-256', encoded);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    // Convert to hex string, then to BigInt (matching Python's int(hexdigest, 16))
+    const hexString = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hashInt = BigInt('0x' + hexString);
+
+    const adjIdx = Number(hashInt % BigInt(ADJECTIVES.length));
+    const nounIdx = Number((hashInt / BigInt(ADJECTIVES.length)) % BigInt(NOUNS.length));
+
+    return `${ADJECTIVES[adjIdx]}-${NOUNS[nounIdx]}`;
+  }
+
+  async function updateAlias() {
+    const username = document.getElementById('username-input').value.trim();
+    const display = document.getElementById('alias-display');
+
+    if (username.length > 0) {
+      const alias = await generateAlias(username);
+      display.textContent = alias;
+      display.style.display = 'block';
+    } else {
+      display.style.display = 'none';
+    }
+  }
+
+  // Load leaderboard on page load and refresh every 30 seconds
+  document.addEventListener('DOMContentLoaded', () => {
+    loadLeaderboard();
+    setInterval(loadLeaderboard, 30000);
+  });
 </script>
  
 </body>
