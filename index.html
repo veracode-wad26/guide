@@ -484,7 +484,8 @@
   .rank.silver { color: #b0b8cc; }
   .rank.bronze { color: #c08050; }
  
-  .lb-name { flex: 1; color: var(--text); }
+  .lb-name { flex: 1; color: var(--text); cursor: help; }
+  .lb-score { font-family: var(--mono); font-size: 12px; color: var(--accent); font-weight: 600; min-width: 30px; text-align: right; cursor: help; }
   .lb-time { font-family: var(--mono); font-size: 11px; color: var(--muted); }
   .lb-badge { font-size: 14px; }
  
@@ -1202,7 +1203,8 @@
       container.innerHTML = top3.map((entry, i) => `
         <div class="leaderboard-row">
           <div class="rank ${rankClasses[i]}">${entry.rank}</div>
-          <div class="lb-name" title="${entry.participant_alias} (${entry.repo})">${entry.participant_alias}</div>
+          <div class="lb-name" title="Repos: ${entry.repos.join(', ')}">${entry.participant_alias}</div>
+          <div class="lb-score" title="Repos: ${entry.repos.join(', ')}">${entry.total_score}</div>
           <div class="lb-badge">${medals[i]}</div>
         </div>
       `).join('');
