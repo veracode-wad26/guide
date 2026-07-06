@@ -585,7 +585,7 @@
  
 <header>
   <div class="header-left">
-    <div class="eyebrow">WeAreDevelopers World Congress · Berlin · July 2025</div>
+    <div class="eyebrow">WeAreDevelopers World Congress · Berlin · July 2026</div>
     <h1>Defending the Modern Supply Chain:<br>Hands-On Vulnerability Remediation</h1>
   </div>
   <div class="header-right">
@@ -676,28 +676,19 @@
  
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px">
         <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">MAVEN</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">com.veracode.firewall:<br>firewall-demo</div>
-        </div>
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">NPM</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">@veracode/<br>firewall-demo</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">@veracode/firewall-demo</div>
+          <a href="https://www.npmjs.com/package/@veracode/firewall-demo" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">npmjs.com &#8599;</a>
         </div>
         <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">PYPI</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">veracode-firewall-demo</div>
+          <a href="https://pypi.org/project/veracode-firewall-demo/" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">pypi.org &#8599;</a>
         </div>
         <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">CARGO</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
-        </div>
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">GOLANG</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">github.com/veracode/<br>firewall-demo-go</div>
-        </div>
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">RUBYGEMS</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text)">veracode-<br>firewall-demo</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">MAVEN</div>
+          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">com.veracode.firewall:firewall-demo</div>
+          <a href="https://central.sonatype.com/artifact/com.veracode.firewall/firewall-demo" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">central.sonatype.com &#8599;</a>
         </div>
       </div>
  
@@ -718,34 +709,34 @@
  
       <div class="callout info">
         <span class="callout-icon">ℹ</span>
-        <span>You get your own isolated fork via <strong>GitHub Classroom</strong> — nobody else touches your repo. Validation uses <strong>free OSS scanners</strong> (npm audit / pip-audit / OWASP Dependency-Check) running in GitHub Actions. No Veracode account needed for the exercise.</span>
+        <span>Fork one of the repos below to get your own copy. Fix the vulnerable dependencies, push, and GitHub Actions runs an OSS scanner automatically. No Veracode account needed.</span>
       </div>
  
-      <h3 style="margin-bottom:10px">Step 1 — Accept your Classroom assignment</h3>
-      <p style="margin-bottom:12px">Click the link for your ecosystem below. GitHub Classroom creates a private fork just for you in under 30 seconds — named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]-[your-username]</code>. Nobody else can push to it.</p>
+      <h3 style="margin-bottom:10px">Step 1 — Fork your repo</h3>
+      <p style="margin-bottom:12px">Click the link for your ecosystem. GitHub creates a fork in your account — named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]</code>. Nobody else can push to it.</p>
  
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
-        <a href="#" onclick="selectRepo('js');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+        <a href="https://github.com/veracode-wad26/verademo-javascript-api/fork" target="_blank" onclick="selectRepo('js');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">📦</div>
           <div class="repo-badge badge-js" style="display:block;text-align:center;margin-bottom:8px">JavaScript</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-js</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-javascript-api</div>
         </a>
-        <a href="#" onclick="selectRepo('py');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+        <a href="https://github.com/veracode-wad26/verademo-python/fork" target="_blank" onclick="selectRepo('py');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">🐍</div>
           <div class="repo-badge badge-py" style="display:block;text-align:center;margin-bottom:8px">Python</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-py</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-python</div>
         </a>
-        <a href="#" onclick="selectRepo('java');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
+        <a href="https://github.com/veracode-wad26/verademo-java/fork" target="_blank" onclick="selectRepo('java');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">☕</div>
           <div class="repo-badge badge-java" style="display:block;text-align:center;margin-bottom:8px">Java</div>
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">classroom.github.com/<br>assignment/verademo-java</div>
+          <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-java</div>
         </a>
       </div>
  
       <hr class="divider">
  
-      <h3 style="margin-bottom:8px">Step 2 — Choose your ecosystem (updates instructions below)</h3>
-      <p>Select which repo you accepted so the rest of the guide updates for your language.</p>
+      <h3 style="margin-bottom:8px">Step 2 — Select your ecosystem</h3>
+      <p>Select which repo you forked so the rest of the guide updates for your language.</p>
  
       <div class="repo-grid">
         <div class="repo-card" id="repo-js" onclick="selectRepo('js')">
@@ -757,7 +748,7 @@
             <span class="vuln-tag">broken auth</span>
             <span class="vuln-tag">SCA findings</span>
           </div>
-          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-javascript-api" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-javascript-api &#8599;</a></div>
         </div>
         <div class="repo-card" id="repo-py" onclick="selectRepo('py')">
           <div class="repo-badge badge-py">Python</div>
@@ -768,7 +759,7 @@
             <span class="vuln-tag">XSS</span>
             <span class="vuln-tag">SCA findings</span>
           </div>
-          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-python" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-python &#8599;</a></div>
         </div>
         <div class="repo-card" id="repo-java" onclick="selectRepo('java')">
           <div class="repo-badge badge-java">Java</div>
@@ -779,41 +770,48 @@
             <span class="vuln-tag">SQLi</span>
             <span class="vuln-tag">SCA findings</span>
           </div>
-          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--muted)">github.com/veracode-demo-labs</div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-java" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-java &#8599;</a></div>
         </div>
       </div>
  
       <div id="repo-instructions" style="display:none">
         <hr class="divider">
-        <h3 style="margin-bottom:14px">Step 3 — Open your Codespace</h3>
-        <p style="margin-bottom:10px">After accepting the Classroom assignment, open your fork in a browser-based VS Code. No install needed — the environment is pre-configured.</p>
+        <h3 style="margin-bottom:14px">Step 2 — Clone and open locally</h3>
+        <p style="margin-bottom:10px">After forking, clone your fork to your machine and open in your preferred editor.</p>
         <div class="code-block" id="codespace-link" style="font-size:13px;padding-right:60px">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span id="codespace-url">https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-javascript-api&ref=participant-start</span>
+          <span id="codespace-url">git clone https://github.com/YOUR-USERNAME/verademo-javascript-api.git && cd verademo-javascript-api && git checkout participant-start</span>
         </div>
         <div class="callout info" style="margin-top:12px">
           <span class="callout-icon">ℹ</span>
-          <span>The Codespace opens on the <strong>participant-start</strong> branch — the intentionally vulnerable version. The <code style="font-family:var(--mono);font-size:12px">main</code> branch has the fixed reference — avoid it until after the exercise.</span>
+          <span>Make sure you're on the <strong>participant-start</strong> branch — the intentionally vulnerable version. The <code style="font-family:var(--mono);font-size:12px">main</code> branch has the fixed reference — avoid it until after the exercise.</span>
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:6px">Step 4 — Read the pre-loaded scan results</h3>
-        <p style="margin-bottom:10px">A scan has already been run for you. Open <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">SCAN-RESULTS.md</code> in the root of the repo. It lists every Critical and High finding with CVE IDs and the affected dependency version.</p>
- 
+        <h3 style="margin-bottom:6px">Step 3 — Scan for vulnerabilities</h3>
+        <p style="margin-bottom:10px">Run <strong>OSV Scanner</strong> locally to see all Critical and High findings in your repo.</p>
+
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">copy</button>
+          <span class="comment"># Install osv-scanner (once)</span><br>
+          <span class="cmd">brew install osv-scanner</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># macOS</span><br>
+          <span class="cmd">winget install Google.OSVScanner</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Windows</span><br><br>
+          <span class="comment"># Run the scan</span><br>
+          <span class="cmd">osv-scanner scan -r .</span>
+        </div>
+
         <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
-          <span style="color:#3d4a6b">## SCAN-RESULTS.md (example — JS repo)</span><br><br>
+          <span style="color:#3d4a6b"># Example output</span><br><br>
           <span style="color:var(--warn)">CRITICAL</span> · CVE-2021-23337 · <span style="color:#fff">lodash 4.17.20</span><br>
           <span style="color:#3d4a6b">  Command injection via _.template(). Fix: bump to 4.17.21</span><br><br>
           <span style="color:var(--warn)">HIGH</span> &nbsp;&nbsp;&nbsp;· CVE-2023-45857 · <span style="color:#fff">axios 0.21.1</span><br>
           <span style="color:#3d4a6b">  CSRF via forged headers. Fix: bump to 1.6.0</span><br><br>
-          <span style="color:var(--warn)">HIGH</span> &nbsp;&nbsp;&nbsp;· CVE-2021-44906 · <span style="color:#fff">minimist 1.2.5</span><br>
-          <span style="color:#3d4a6b">  Prototype pollution. Fix: bump to 1.2.6</span><br><br>
           <span style="color:#ff6b35;opacity:0.6">MALICIOUS</span> · <span style="color:#fff">@veracode/firewall-demo 1.0.0</span><br>
-          <span style="color:#3d4a6b">  🎯 Bonus: remove this entirely</span>
+          <span style="color:#3d4a6b">  🎯 Bonus challenge: see below</span>
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 5 — Fix without breaking</h3>
+        <h3 style="margin-bottom:10px">Step 4 — Fix without breaking</h3>
         <p style="margin-bottom:12px">Edit only the dependency manifest. The app must still pass its test suite after your changes.</p>
  
         <div id="fix-checklist-wrap">
@@ -830,46 +828,37 @@
               <input type="checkbox"> Bump each dep to the safe version listed — do not change the rest
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Save the file and run the test suite in the terminal
+              <input type="checkbox"> Run the test suite to confirm no regressions
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Confirm tests pass — no regressions
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Commit and push — this triggers the Actions scan
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> 🎯 Bonus: remove the malicious package entirely and push again
+              <input type="checkbox"> Commit and push — this triggers the Actions scan and updates the leaderboard
             </label>
           </div>
         </div>
- 
+
         <div class="code-block" style="margin-top:14px">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span class="comment"># Run tests (check README for exact command)</span><br>
-          <span class="cmd">npm test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># JS (verademo-javascript-api)</span><br>
-          <span class="cmd">python manage.py test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Python (verademo-python / Django)</span><br>
-          <span class="cmd">mvn test</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Java (verademo-java / Maven)</span><br><br>
-          <span class="comment"># Commit and push to trigger the scan</span><br>
+          <span class="comment"># Verify locally first</span><br>
+          <span class="cmd">osv-scanner scan -r .</span><br><br>
+          <span class="comment"># Commit and push to trigger the scan + score</span><br>
           <span class="cmd">git add</span> <span class="str">.</span> &amp;&amp; <span class="cmd">git commit</span> -m <span class="str">"fix: remediate critical CVEs"</span><br>
           <span class="cmd">git push</span>
         </div>
- 
+
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 6 — Push and watch the scan</h3>
+        <h3 style="margin-bottom:10px">Step 5 — Push and watch the scan</h3>
         <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically — no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
  
         <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
-          <span style="color:#3d4a6b"># What runs in Actions per ecosystem</span><br><br>
-          <span style="color:var(--accent)">[JS]</span> &nbsp;&nbsp; npm audit --audit-level=high<br>
-          <span style="color:var(--accent)">[PY]</span> &nbsp;&nbsp; pip-audit -r requirements.txt<br>
-          <span style="color:var(--accent)">[Java]</span> mvn dependency-check:check -DfailBuildOnCVSS=7
+          <span style="color:#3d4a6b"># What runs in Actions (all ecosystems)</span><br><br>
+          <span style="color:var(--accent)">osv-scanner scan -r -f json .</span><br><br>
+          <span style="color:#3d4a6b"># Scores your PR against the baseline and updates the leaderboard</span>
         </div>
  
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
           <div style="border:1px solid var(--border);border-radius:6px;padding:12px 14px">
             <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Still failing ❌</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log — a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 5.</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log — a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 4.</div>
           </div>
           <div style="border:1px solid rgba(61,214,140,0.2);border-radius:6px;padding:12px 14px;background:var(--green-dim)">
             <div style="font-family:var(--mono);font-size:10px;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">All clear ✅</div>
@@ -888,6 +877,38 @@
         <div class="callout success">
           <span class="callout-icon">✓</span>
           <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em> — reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
+        </div>
+
+        <hr class="divider">
+        <h3 style="margin-bottom:10px">🎯 Bonus — Trigger the Package Firewall</h3>
+        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push — watch the Package Firewall block it in CI.</p>
+
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">copy</button>
+          <span class="comment"># npm — add to package.json dependencies:</span><br>
+          <span class="str">"@veracode/firewall-demo"</span>: <span class="str">"1.0.0"</span><br><br>
+          <span class="comment"># pypi — add to requirements.txt:</span><br>
+          veracode-firewall-demo==0.1.0<br><br>
+          <span class="comment"># maven — add to pom.xml:</span><br>
+          &lt;<span class="kw">dependency</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">groupId</span>&gt;com.veracode.firewall&lt;/<span class="kw">groupId</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">artifactId</span>&gt;firewall-demo&lt;/<span class="kw">artifactId</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">version</span>&gt;1.0.0&lt;/<span class="kw">version</span>&gt;<br>
+          &lt;/<span class="kw">dependency</span>&gt;
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠</span>
+          <span>These are <strong>safe Veracode demo packages</strong> on public registries — no malicious code will run. The firewall blocks them purely based on policy.</span>
+        </div>
+
+        <div class="checklist" style="margin-top:12px">
+          <label class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox"> Add the demo malicious package for your ecosystem to your manifest
+          </label>
+          <label class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox"> Commit and push — watch the Package Firewall block it in CI
+          </label>
         </div>
       </div>
  
@@ -970,10 +991,9 @@
         <div class="sidebar-widget" style="margin:0">
           <div class="widget-title">Workshop Repos</div>
           <div style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--text)">
-            github.com/veracode-demo-labs/<br>
-            ├── verademo-javascript-api<br>
-            ├── verademo-python<br>
-            └── verademo-java
+            <a href="https://github.com/veracode-wad26/verademo-javascript-api" target="_blank" style="color:var(--accent);text-decoration:none">verademo-javascript-api &#8599;</a><br>
+            <a href="https://github.com/veracode-wad26/verademo-python" target="_blank" style="color:var(--accent);text-decoration:none">verademo-python &#8599;</a><br>
+            <a href="https://github.com/veracode-wad26/verademo-java" target="_blank" style="color:var(--accent);text-decoration:none">verademo-java &#8599;</a>
           </div>
         </div>
         <div class="sidebar-widget" style="margin:0">
@@ -1113,9 +1133,9 @@
     document.getElementById('repo-' + type).classList.add('selected');
  
     const urls = {
-      js:   'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-javascript-api&ref=participant-start',
-      py:   'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-python&ref=participant-start',
-      java: 'https://github.com/codespaces/new?repo=veracode-demo-labs/verademo-java&ref=participant-start'
+      js:   'git clone https://github.com/YOUR-USERNAME/verademo-javascript-api.git && cd verademo-javascript-api && git checkout participant-start',
+      py:   'git clone https://github.com/YOUR-USERNAME/verademo-python.git && cd verademo-python && git checkout participant-start',
+      java: 'git clone https://github.com/YOUR-USERNAME/verademo-java.git && cd verademo-java && git checkout participant-start'
     };
  
     const manifests = {
