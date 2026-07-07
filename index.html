@@ -1196,6 +1196,21 @@
     });
   }
 
+  /**
+   * Encode String to HTML encoded String.
+   *
+   * Use TextNode to let browser do encoding.
+   * Copied from: https://docs.veracode.com
+   * @param {string} value String to encode
+   * @returns {string} Encoded string
+   */
+  function vcEncodeHtml(value) {
+    var text = document.createTextNode(value);
+    var p = document.createElement('p');
+    p.appendChild(text);
+    return p.innerHTML;
+  }
+
   // Fetch and display leaderboard from GitHub Pages
   async function loadLeaderboard() {
     try {
@@ -1222,9 +1237,9 @@
 
       container.innerHTML = top3.map((entry, i) => `
         <div class="leaderboard-row">
-          <div class="rank ${rankClasses[i]}">${entry.rank}</div>
-          <div class="lb-name" title="Repos: ${entry.repos.join(', ')}">${entry.participant_alias}</div>
-          <div class="lb-score" title="Repos: ${entry.repos.join(', ')}">${entry.total_score}</div>
+          <div class="rank ${rankClasses[i]}">${vcEncodeHtml(String(entry.rank))}</div>
+          <div class="lb-name" title="Repos: ${vcEncodeHtml(entry.repos.join(', '))}">${vcEncodeHtml(entry.participant_alias)}</div>
+          <div class="lb-score" title="Repos: ${vcEncodeHtml(entry.repos.join(', '))}">${vcEncodeHtml(String(entry.total_score))}</div>
           <div class="lb-badge">${medals[i]}</div>
         </div>
       `).join('');
