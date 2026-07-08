@@ -963,21 +963,25 @@
           </div>
         </div>
 
-        <p style="margin-bottom:12px;color:var(--muted);font-size:13px"><strong>Test with a known risky package:</strong></p>
+        <p style="margin-bottom:12px;color:var(--muted);font-size:13px"><strong>Test with Veracode demo packages:</strong></p>
 
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
           <span class="comment"># npm - add to package.json dependencies:</span><br>
-          <span class="str">"eslint-scope"</span>: <span class="str">"3.7.1"</span>&nbsp;&nbsp;<span class="comment">// malicious version, widely blocked</span><br><br>
+          <span class="str">"@veracode/firewall-demo"</span>: <span class="str">"1.0.0"</span><br><br>
           <span class="comment"># pypi - add to requirements.txt:</span><br>
-          <span class="comment"># Check your firewall's blocked list or known malicious packages</span><br><br>
+          veracode-firewall-demo==0.1.0<br><br>
           <span class="comment"># maven - add to pom.xml:</span><br>
-          <span class="comment">&lt;!-- Use a package your firewall flags as risky --&gt;</span>
+          &lt;<span class="kw">dependency</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">groupId</span>&gt;com.veracode.firewall&lt;/<span class="kw">groupId</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">artifactId</span>&gt;firewall-demo&lt;/<span class="kw">artifactId</span>&gt;<br>
+          &nbsp;&nbsp;&lt;<span class="kw">version</span>&gt;1.0.0&lt;/<span class="kw">version</span>&gt;<br>
+          &lt;/<span class="kw">dependency</span>&gt;
         </div>
 
-        <div class="callout info">
-          <span class="callout-icon">ℹ</span>
-          <span><strong>If your company has a firewall:</strong> Ask your platform or security team which packages are flagged. <strong>If setting up locally:</strong> Try Aikido (open source) or a free tier. This teaches you how policy enforcement blocks risky dependencies before they reach production.</span>
+        <div class="callout warn">
+          <span class="callout-icon">⚠</span>
+          <span><strong>Check with your security team first.</strong> These Veracode demo packages are safe, no malicious code will run, but adding them will trigger your firewall. Coordinate with your security or platform team so they expect the alert.</span>
         </div>
 
         <div class="checklist" style="margin-top:12px">
