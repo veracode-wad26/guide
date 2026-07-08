@@ -706,28 +706,28 @@
       </div>
 
       <h3>Part 1 — SCA Scanner finds the vulnerability</h3>
-      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong> — a JavaScript sandbox library. Run the OSV scanner to find all known CVEs in the dependencies:</p>
+      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong> — a JavaScript sandbox library with 27 Critical CVEs. The SCA scan surfaces them instantly.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
-            <div class="step-title">Run the SCA scan</div>
-            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">osv-scanner scan -r .</code> — finds 27 Critical CVEs in vm2 3.9.5 alone, including multiple sandbox escape vulnerabilities.</div>
+            <div class="step-title">SCA scan output</div>
+            <div class="step-desc">27 Critical CVEs in vm2 3.9.5 alone — multiple sandbox escape vulnerabilities, several scoring CVSS 10.0.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">vm2 — a broken sandbox</div>
-            <div class="step-desc">vm2 is used to run untrusted JavaScript in isolation. But CVE-2023-29199 lets an attacker bypass the sandbox and execute arbitrary code on the host system.</div>
+            <div class="step-desc">vm2 promises to run untrusted JavaScript safely. CVE-2023-29199 breaks that promise — an attacker can escape the sandbox entirely and run arbitrary code on the host.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">Live RCE exploit</div>
-            <div class="step-desc">One curl command breaks out of the sandbox, reads credentials off disk, and proves full system access. See the <a href="exploit-demo.html" target="_blank" style="color:var(--accent)">exploit demo page</a> for the full walkthrough.</div>
+            <div class="step-desc">One curl command breaks out of the sandbox, reads credentials off disk, and proves full system access on the host.</div>
           </div>
         </div>
       </div>
