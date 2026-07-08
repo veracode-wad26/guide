@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Defending the Modern Supply Chain — Workshop Guide</title>
+<title>Defending the Modern Supply Chain, Workshop Guide</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
  
@@ -137,7 +137,7 @@
   .main {
     display: grid;
     grid-template-columns: 1fr 300px;
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh, 130px);
   }
  
   .content {
@@ -625,7 +625,7 @@
       <div class="panel-heading">
         <div class="panel-icon icon-warn">⚡</div>
         <div>
-          <h2>The Exploit — Live Demo</h2>
+          <h2>The Exploit, Live Demo</h2>
           <div class="subtitle">Watch how a malicious package enters a supply chain undetected</div>
         </div>
       </div>
@@ -650,7 +650,7 @@
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">Malicious package introduced</div>
-            <div class="step-desc">A dependency is added to <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">package.json</code> — a realistic typosquat that mimics a legitimate utility package.</div>
+            <div class="step-desc">A dependency is added to <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">package.json</code>, a realistic typosquat that mimics a legitimate utility package.</div>
           </div>
         </div>
         <div class="step">
@@ -709,11 +709,11 @@
  
       <div class="callout info">
         <span class="callout-icon">ℹ</span>
-        <span>Fork one of the repos below to get your own copy. Fix the vulnerable dependencies, push, and GitHub Actions runs an OSS scanner automatically. No Veracode account needed.</span>
+        <span>Fork one of the repos below to get your own copy. Create a Pull Request back to the original repo. Fix the vulnerable dependencies, push, and GitHub Actions runs an OSS scanner automatically. No Veracode account needed.</span>
       </div>
  
-      <h3 style="margin-bottom:10px">Step 1 — Fork your repo</h3>
-      <p style="margin-bottom:12px">Click the link for your ecosystem. GitHub creates a fork in your account — named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]</code>. Nobody else can push to it.</p>
+      <h3 style="margin-bottom:10px">Step 1, Fork your repo</h3>
+      <p style="margin-bottom:12px">Click the link for your ecosystem. GitHub creates a fork in your account, named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]</code>. Nobody else can push to it.</p>
  
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
         <a href="https://github.com/veracode-wad26/verademo-javascript-api/fork" target="_blank" onclick="selectRepo('js');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
@@ -738,7 +738,7 @@
  
       <hr class="divider">
  
-      <h3 style="margin-bottom:8px">Step 2 — Select your ecosystem</h3>
+      <h3 style="margin-bottom:8px">Step 2, Select your ecosystem</h3>
       <p>Select which repo you forked so the rest of the guide updates for your language.</p>
  
       <div class="repo-grid">
@@ -779,7 +779,7 @@
  
       <div id="repo-instructions" style="display:none">
         <hr class="divider">
-        <h3 style="margin-bottom:14px">Step 2 — Clone and open locally</h3>
+        <h3 style="margin-bottom:14px">Step 2, Clone and open locally</h3>
         <p style="margin-bottom:10px">After forking, clone your fork to your machine and open in your preferred editor.</p>
         <div class="code-block" id="codespace-link" style="font-size:13px;padding-right:60px">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -787,11 +787,11 @@
         </div>
         <div class="callout info" style="margin-top:12px">
           <span class="callout-icon">ℹ</span>
-          <span>Make sure you're on the <strong>participant-start</strong> branch — the intentionally vulnerable version. The <code style="font-family:var(--mono);font-size:12px">main</code> branch has the fixed reference — avoid it until after the exercise.</span>
+          <span>The <strong>participant-start</strong> branch is the default, the intentionally vulnerable version. All your changes will be on this branch.</span>
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:6px">Step 3 — Scan for vulnerabilities</h3>
+        <h3 style="margin-bottom:6px">Step 3, Scan for vulnerabilities</h3>
         <p style="margin-bottom:10px">Run <strong>OSV Scanner</strong> locally to see all Critical and High findings in your repo.</p>
 
         <div class="code-block">
@@ -814,7 +814,7 @@
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 4 — Fix without breaking</h3>
+        <h3 style="margin-bottom:10px">Step 4, Fix without breaking</h3>
         <p style="margin-bottom:12px">Edit only the dependency manifest. The app must still pass its test suite after your changes.</p>
  
         <div id="fix-checklist-wrap">
@@ -828,13 +828,10 @@
               <input type="checkbox"> Open <code style="font-family:var(--mono);font-size:11px;color:var(--accent)" id="manifest-inline">package.json</code> and find the vulnerable versions from SCAN-RESULTS.md
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Bump each dep to the safe version listed — do not change the rest
+              <input type="checkbox"> Bump each dep to the safe version listed, do not change the rest
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Run the test suite to confirm no regressions
-            </label>
-            <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Commit and push — this triggers the Actions scan and updates the leaderboard
+              <input type="checkbox"> Commit and push, this triggers the Actions scan and updates the leaderboard
             </label>
           </div>
         </div>
@@ -849,8 +846,8 @@
         </div>
 
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 5 — Push and watch the scan</h3>
-        <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically — no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
+        <h3 style="margin-bottom:10px">Step 5, Push and watch the scan</h3>
+        <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically, no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
  
         <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
           <span style="color:#3d4a6b"># What runs in Actions (all ecosystems)</span><br><br>
@@ -861,38 +858,38 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
           <div style="border:1px solid var(--border);border-radius:6px;padding:12px 14px">
             <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Still failing ❌</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log — a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 4.</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log, a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 4.</div>
           </div>
           <div style="border:1px solid rgba(61,214,140,0.2);border-radius:6px;padding:12px 14px;background:var(--green-dim)">
             <div style="font-family:var(--mono);font-size:10px;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">All clear ✅</div>
-            <div style="font-size:12px;color:#8fe8b4;line-height:1.6">Zero Critical/High findings. Raise your hand — you're on the leaderboard.</div>
+            <div style="font-size:12px;color:#8fe8b4;line-height:1.6">Zero Critical/High findings. Raise your hand, you're on the leaderboard.</div>
           </div>
         </div>
  
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>If you see findings you didn't expect, check for <strong>transitive dependencies</strong> — a package you kept may pull in a vulnerable version indirectly. Look at the full audit output, not just the top-level deps.</span>
+          <span>If you see findings you didn't expect, check for <strong>transitive dependencies</strong>, a package you kept may pull in a vulnerable version indirectly. Look at the full audit output, not just the top-level deps.</span>
         </div>
  
         <hr class="divider">
         <h3 style="margin-bottom:10px">The Veracode moment</h3>
-        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector — showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
+        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector, showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
         <div class="callout success">
           <span class="callout-icon">✓</span>
-          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em> — reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
+          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em>, reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
         </div>
 
         <hr class="divider">
-        <h3 style="margin-bottom:10px">🎯 Bonus — Trigger the Package Firewall</h3>
-        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push — watch the Package Firewall block it in CI.</p>
+        <h3 style="margin-bottom:10px">🎯 Bonus, Trigger the Package Firewall</h3>
+        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push, watch the Package Firewall block it in CI.</p>
 
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span class="comment"># npm — add to package.json dependencies:</span><br>
+          <span class="comment"># npm, add to package.json dependencies:</span><br>
           <span class="str">"@veracode/firewall-demo"</span>: <span class="str">"1.0.0"</span><br><br>
-          <span class="comment"># pypi — add to requirements.txt:</span><br>
+          <span class="comment"># pypi, add to requirements.txt:</span><br>
           veracode-firewall-demo==0.1.0<br><br>
-          <span class="comment"># maven — add to pom.xml:</span><br>
+          <span class="comment"># maven, add to pom.xml:</span><br>
           &lt;<span class="kw">dependency</span>&gt;<br>
           &nbsp;&nbsp;&lt;<span class="kw">groupId</span>&gt;com.veracode.firewall&lt;/<span class="kw">groupId</span>&gt;<br>
           &nbsp;&nbsp;&lt;<span class="kw">artifactId</span>&gt;firewall-demo&lt;/<span class="kw">artifactId</span>&gt;<br>
@@ -902,7 +899,7 @@
 
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>These are <strong>safe Veracode demo packages</strong> on public registries — no malicious code will run. The firewall blocks them purely based on policy.</span>
+          <span>These are <strong>safe Veracode demo packages</strong> on public registries, no malicious code will run. The firewall blocks them purely based on policy.</span>
         </div>
 
         <div class="checklist" style="margin-top:12px">
@@ -910,7 +907,7 @@
             <input type="checkbox"> Add the demo malicious package for your ecosystem to your manifest
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Commit and push — watch the Package Firewall block it in CI
+            <input type="checkbox"> Commit and push, watch the Package Firewall block it in CI
           </label>
         </div>
       </div>
@@ -927,7 +924,7 @@
         <div class="panel-icon icon-green">💬</div>
         <div>
           <h2>Q&amp;A + Best Practices</h2>
-          <div class="subtitle">Open discussion — Boy Baukema leads</div>
+          <div class="subtitle">Open discussion, Boy Baukema leads</div>
         </div>
       </div>
  
@@ -947,14 +944,14 @@
         <div class="step">
           <div class="step-num">②</div>
           <div class="step-body">
-            <div class="step-title">Blocking vs. alerting — what's right for your pipeline?</div>
+            <div class="step-title">Blocking vs. alerting, what's right for your pipeline?</div>
             <div class="step-desc">Hard blocks in CI slow dev teams. Alerting without action creates noise. How do you find the right policy for your risk tolerance?</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">③</div>
           <div class="step-body">
-            <div class="step-title">Breaking changes when remediating — how do you manage this?</div>
+            <div class="step-title">Breaking changes when remediating, how do you manage this?</div>
             <div class="step-desc">Major version bumps break APIs. Strategies: test coverage first, pin transitives, use Veracode Fix for automated suggestions.</div>
           </div>
         </div>
@@ -1061,10 +1058,17 @@
         <span style="font-size:12px;color:var(--muted);margin-left:auto" id="scan-count">awaiting push</span>
       </div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6">
-        OSS scanner runs on push — no Veracode account needed.<br>Check the <strong style="color:var(--text)">Actions</strong> tab in your fork.<br><br>
-        <span style="color:var(--accent)">JS &nbsp;&nbsp;</span> npm audit<br>
-        <span style="color:var(--accent)">PY &nbsp;&nbsp;</span> pip-audit<br>
-        <span style="color:var(--accent)">Java </span> dependency-check
+        Google's OSV Scanner runs on pull request back to the original repo. No Veracode account needed. Run OSV locally or in a GitHub CodeSpace.<br><br>
+        <strong style="color:var(--text);display:block;margin-bottom:8px">Download OSV Scanner:</strong>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_darwin_amd64" style="color:var(--accent);text-decoration:none">macOS Intel</a><br>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_darwin_arm64" style="color:var(--accent);text-decoration:none">macOS Apple Silicon</a><br>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_linux_amd64" style="color:var(--accent);text-decoration:none">Linux x86-64</a><br>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_linux_arm64" style="color:var(--accent);text-decoration:none">Linux ARM64</a><br>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_windows_amd64.exe" style="color:var(--accent);text-decoration:none">Windows x86-64</a><br>
+        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_windows_arm64.exe" style="color:var(--accent);text-decoration:none">Windows ARM64</a>
+      </div>
+      <div style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:5px;padding:10px;margin-top:12px;font-size:11px;line-height:1.5">
+        <strong style="color:#ffb89a">⚠ Maven projects:</strong> osv-scanner may hit Maven Central rate limits (HTTP 429) when resolving parent POMs. <strong>Workaround:</strong> Serve your local Maven cache via HTTP: <code style="color:var(--accent)">cd ~/.m2/repository && python3 -m http.server 8080</code>, then run <code style="color:var(--accent)">osv-scanner scan -r . --maven-registry http://localhost:8080</code>. See <a href="https://github.com/google/osv-scanner/issues/2918" target="_blank" rel="noopener noreferrer" style="color:#ffb89a;text-decoration:underline">issue #2918</a>.
       </div>
     </div>
  
@@ -1086,7 +1090,7 @@
         style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text);font-family:var(--mono);font-size:12px;margin-bottom:8px"
         oninput="updateAlias()">
       <div id="alias-display" style="font-family:var(--mono);font-size:13px;color:var(--accent);padding:8px 10px;border-radius:5px;background:var(--accent-dim);border:1px solid rgba(91,138,255,0.2);text-align:center;display:none">
-        —
+        -
       </div>
       <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5;text-align:center">
         Enter your GitHub username to see your leaderboard alias
@@ -1168,13 +1172,13 @@
  
     setTimeout(() => {
       if (!scanRun) {
-        // First scan - still vulnerable
+        // First scan, still vulnerable
         document.getElementById('scan-count').textContent = '8 findings';
         btn.textContent = 'Re-Scan';
         btn.disabled = false;
         scanRun = true;
       } else {
-        // Second scan - clean
+        // Second scan, clean
         const box = document.getElementById('scan-status-box');
         box.classList.add('pass');
         box.querySelector('.status-dot').style.background = 'var(--green)';
