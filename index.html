@@ -636,7 +636,8 @@
       </div>
 
       <h3>Why this matters</h3>
-      <p>62% of applications contain vulnerabilities from third-party libraries. Those vulnerabilities take an average of 358 days to fix. In 2025, <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype identified over 454,600 new malicious packages</a> across npm, PyPI, Maven, NuGet, and Hugging Face.</p>
+      <p>62% of applications contain vulnerabilities from third-party libraries, and those vulnerabilities take an average of 358 days to fix. <a href="https://www.veracode.com/resources/analyst-reports/state-of-software-security-2026/" target="_blank" style="color:var(--accent);text-decoration:none">Veracode State of Software Security 2026</a>.</p>
+      <p style="margin-top:10px">In 2025, Sonatype identified over 454,600 new malicious packages across npm, PyPI, Maven, NuGet, and Hugging Face. <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype State of the Software Supply Chain 2025</a>.</p>
 
       <hr class="divider">
 
@@ -646,7 +647,7 @@
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">Supply chain definition</div>
-            <div class="step-desc">Third-party SaaS, libraries, IDE extensions, CI/CD pipelines, transitive dependencies, base images, and AI tools — everything external that touches your software.</div>
+            <div class="step-desc">Third-party SaaS, libraries, IDE extensions, CI/CD pipelines, transitive dependencies, base images, and AI tools. Everything external that touches your software.</div>
           </div>
         </div>
         <div class="step">
@@ -674,7 +675,7 @@
           <div class="step-num">5</div>
           <div class="step-body">
             <div class="step-title">AI agent risks</div>
-            <div class="step-desc">Over 36% of AI skills contain vulnerabilities. Skills can access files, shells, and credentials — treat them like untrusted third-party code.</div>
+            <div class="step-desc">Over 36% of AI skills contain vulnerabilities. Skills can access files, shells, and credentials. Treat them like untrusted third-party code. <a href="https://snyk.io/blog/toxicskills-malicious-ai-agent-skills-clawhub/" target="_blank" style="color:var(--accent);text-decoration:none">Snyk</a>, <a href="https://repello.ai/blog/clawhavoc-supply-chain-attack" target="_blank" style="color:var(--accent);text-decoration:none">Repello AI</a>.</div>
           </div>
         </div>
         <div class="step">
@@ -688,7 +689,7 @@
 
       <hr class="divider">
 
-      <p style="font-size:13px;color:var(--muted)">After the presentation, we'll move into hands-on exercises where you'll fix real vulnerabilities and see defense mechanisms in action.</p>
+      <p style="font-size:13px;color:var(--muted)">After the presentation, we'll do a live demo showing a real SCA vulnerability being exploited, then move into hands-on exercises.</p>
 
       <div class="nav-row">
         <button class="btn btn-primary" onclick="showPhase(1)">Next → The Exploit Demo</button>
@@ -705,8 +706,8 @@
         </div>
       </div>
 
-      <h3>Part 1 — SCA Scanner finds the vulnerability</h3>
-      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong>, a JavaScript sandbox library with 27 Critical CVEs. The SCA scan surfaces them instantly.</p>
+      <h3>Part 1: SCA Scanner finds the vulnerability</h3>
+      <p style="margin-bottom:12px">The demo app uses <strong>vm2</strong>, a JavaScript sandbox library. We pin it to version 3.9.5 to demonstrate what an unpatched dependency looks like. The SCA scan finds 27 Critical CVEs.</p>
 
       <div class="steps">
         <div class="step">
@@ -719,7 +720,7 @@
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">vm2 — a broken sandbox</div>
+            <div class="step-title">vm2: a broken sandbox</div>
             <div class="step-desc">vm2 promises to run untrusted JavaScript safely. CVE-2023-29199 breaks that promise. An attacker can escape the sandbox and run arbitrary code on the host.</div>
           </div>
         </div>
@@ -734,7 +735,7 @@
 
       <hr class="divider">
 
-      <h3>Part 2 — Package Firewall blocks a malicious install</h3>
+      <h3>Part 2: Package Firewall blocks a malicious install</h3>
       <p style="margin-bottom:12px">A package firewall blocks <strong>malicious packages</strong>: typosquats, supply chain attacks, intentionally backdoored packages. It does not fix CVEs. That is what the SCA scanner is for.</p>
 
       <div class="steps">
@@ -937,16 +938,8 @@
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:10px">The Veracode moment</h3>
-        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector, showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
-        <div class="callout success">
-          <span class="callout-icon">✓</span>
-          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em>, reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
-        </div>
-
-        <hr class="divider">
         <h3 style="margin-bottom:10px">🎯 Bonus, Test Your Package Firewall</h3>
-        <p style="margin-bottom:12px">Once you have a green scan, pick a package firewall tool and test it by blocking a known risky package. Either set one up locally (free tier) or check what your company already uses.</p>
+        <p style="margin-bottom:12px">Once you have a green scan, pick a package firewall tool and test it using one of the Veracode demo packages below. Either set one up locally (free tier) or check what your company already uses.</p>
 
         <p style="margin-bottom:12px;color:var(--muted);font-size:13px"><strong>Popular package firewall tools (pick one):</strong></p>
 
@@ -999,7 +992,7 @@
             <input type="checkbox"> Identify or set up a package firewall tool
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Add a known risky package to your manifest
+            <input type="checkbox"> Add a Veracode demo package to your manifest to trigger the firewall
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
             <input type="checkbox"> Commit and push, watch the firewall block it
@@ -1032,8 +1025,8 @@
         <div class="step">
           <div class="step-num">①</div>
           <div class="step-body">
-            <div class="step-title">Where does SCA stop and the Package Firewall begin?</div>
-            <div class="step-desc">SCA tells you what's vulnerable. The Package Firewall stops malicious packages before they're ever installed. They're complementary, not competing.</div>
+            <div class="step-title">Where does SCA stop and a package firewall begin?</div>
+            <div class="step-desc">SCA tells you what's vulnerable. A package firewall stops malicious packages before they're ever installed. They're complementary, not competing.</div>
           </div>
         </div>
         <div class="step">
@@ -1092,12 +1085,16 @@
           </div>
         </div>
         <div class="sidebar-widget" style="margin:0">
-          <div class="widget-title">Veracode Docs</div>
+          <div class="widget-title">Resources</div>
           <div style="font-size:13px;line-height:1.9;color:var(--text)">
-            <a href="https://docs.veracode.com" style="color:var(--accent);text-decoration:none">docs.veracode.com</a><br>
-            SCA Agent-Based Scanning<br>
-            Package Firewall Policy Guide<br>
-            Pipeline Scan CLI Reference
+            <a href="https://google.github.io/osv-scanner/" target="_blank" style="color:var(--accent);text-decoration:none">OSV Scanner docs ↗</a><br>
+            <a href="https://osv.dev" target="_blank" style="color:var(--accent);text-decoration:none">OSV vulnerability database ↗</a><br>
+            <a href="https://docs.github.com/en/code-security/dependabot" target="_blank" style="color:var(--accent);text-decoration:none">GitHub Dependabot docs ↗</a><br>
+            <a href="https://www.cisa.gov/topics/cyber-threats-and-advisories/supply-chain-risk-management" target="_blank" style="color:var(--accent);text-decoration:none">CISA supply chain guidance ↗</a><br>
+            <a href="https://slsa.dev" target="_blank" style="color:var(--accent);text-decoration:none">SLSA framework ↗</a><br>
+            <a href="https://scorecard.dev" target="_blank" style="color:var(--accent);text-decoration:none">OpenSSF Scorecard ↗</a><br>
+            <a href="https://owasp.org/www-project-dependency-track/" target="_blank" style="color:var(--accent);text-decoration:none">OWASP Dependency Track ↗</a><br>
+            <a href="https://docs.veracode.com/r/Software_Composition_Analysis" target="_blank" style="color:var(--accent);text-decoration:none">Veracode SCA docs ↗</a>
           </div>
         </div>
       </div>
@@ -1108,7 +1105,7 @@
           <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
           <div class="step-body">
             <div class="step-title">SCA is not optional</div>
-            <div class="step-desc">Your app is 80%+ open-source code by dependency count. You own the risk from every package you import, whether you wrote it or not.</div>
+            <div class="step-desc">98% of codebases contain open source components, with the average app pulling in 1,180 packages. You own the risk from every package you import, whether you wrote it or not. <a href="https://www.blackduck.com/resources/analyst-reports/open-source-security-risk-analysis.html" target="_blank" style="color:var(--accent);text-decoration:none">Black Duck OSSRA 2026</a>.</div>
           </div>
         </div>
         <div class="step">
