@@ -706,21 +706,21 @@
       </div>
 
       <h3>Part 1 — SCA Scanner finds the vulnerability</h3>
-      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong> — a JavaScript sandbox library with 27 Critical CVEs. The SCA scan surfaces them instantly.</p>
+      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong>, a JavaScript sandbox library with 27 Critical CVEs. The SCA scan surfaces them instantly.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">SCA scan output</div>
-            <div class="step-desc">27 Critical CVEs in vm2 3.9.5 alone — multiple sandbox escape vulnerabilities, several scoring CVSS 10.0.</div>
+            <div class="step-desc">27 Critical CVEs in vm2 3.9.5. Multiple sandbox escape vulnerabilities, several scoring CVSS 10.0.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">vm2 — a broken sandbox</div>
-            <div class="step-desc">vm2 promises to run untrusted JavaScript safely. CVE-2023-29199 breaks that promise — an attacker can escape the sandbox entirely and run arbitrary code on the host.</div>
+            <div class="step-desc">vm2 promises to run untrusted JavaScript safely. CVE-2023-29199 breaks that promise. An attacker can escape the sandbox and run arbitrary code on the host.</div>
           </div>
         </div>
         <div class="step">
@@ -735,21 +735,21 @@
       <hr class="divider">
 
       <h3>Part 2 — Package Firewall blocks a malicious install</h3>
-      <p style="margin-bottom:12px">A package firewall blocks <strong>malicious packages</strong> — typosquats, supply chain attacks, intentionally backdoored packages. It does not fix CVEs; that's what the SCA scanner is for.</p>
+      <p style="margin-bottom:12px">A package firewall blocks <strong>malicious packages</strong>: typosquats, supply chain attacks, intentionally backdoored packages. It does not fix CVEs. That is what the SCA scanner is for.</p>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-body">
             <div class="step-title">Attempt to install a malicious package</div>
-            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">npm install @veracode/firewall-demo@1.0.0</code> — this package is registered as a known malicious demo package. Your firewall should block it immediately.</div>
+            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">npm install @veracode/firewall-demo@1.0.0</code> is a known malicious demo package. A configured firewall will block it.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">5</div>
           <div class="step-body">
             <div class="step-title">The block</div>
-            <div class="step-desc">The install is blocked. Your firewall caught the package before it touched your environment. No code ran, nothing was installed.</div>
+            <div class="step-desc">The install is blocked. The package never reached your environment. No code ran, nothing was installed.</div>
           </div>
         </div>
       </div>
