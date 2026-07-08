@@ -596,21 +596,26 @@
  
 <div class="timeline">
   <div class="phase active" onclick="showPhase(0)">
+    <div class="phase-label">Presentation</div>
+    <div class="phase-title">Supply Chain Overview</div>
+    <div class="phase-duration">20 min · Context</div>
+  </div>
+  <div class="phase" onclick="showPhase(1)">
     <div class="phase-label">Act 1</div>
     <div class="phase-title">The Exploit</div>
     <div class="phase-duration">15 min · Demo</div>
   </div>
-  <div class="phase" onclick="showPhase(1)">
+  <div class="phase" onclick="showPhase(2)">
     <div class="phase-label">Act 2</div>
     <div class="phase-title">Hands-On Fix</div>
     <div class="phase-duration">50 min · Exercise</div>
   </div>
-  <div class="phase" onclick="showPhase(2)">
+  <div class="phase" onclick="showPhase(3)">
     <div class="phase-label">Act 3</div>
     <div class="phase-title">Q&amp;A</div>
     <div class="phase-duration">25 min · Discussion</div>
   </div>
-  <div class="phase" onclick="showPhase(3)">
+  <div class="phase" onclick="showPhase(4)">
     <div class="phase-label">Resources</div>
     <div class="phase-title">Take-Aways</div>
     <div class="phase-duration">Keep &amp; share</div>
@@ -619,9 +624,79 @@
  
 <div class="main">
   <div class="content">
- 
-    <!-- PANEL 0: THE EXPLOIT -->
+
+    <!-- PANEL 0: PRESENTATION OVERVIEW -->
     <div class="panel active" id="panel-0">
+      <div class="panel-heading">
+        <div class="panel-icon icon-blue">📊</div>
+        <div>
+          <h2>Supply Chain Security Overview</h2>
+          <div class="subtitle">What we're covering in the presentation</div>
+        </div>
+      </div>
+
+      <h3>Why this matters</h3>
+      <p>62% of applications contain vulnerabilities from third-party libraries. Those vulnerabilities take an average of 358 days to fix. In 2025, <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype identified over 454,600 new malicious packages</a> across npm, PyPI, Maven, NuGet, and Hugging Face.</p>
+
+      <hr class="divider">
+
+      <h3>What we'll discuss</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Supply chain definition</div>
+            <div class="step-desc">Third-party SaaS, libraries, IDE extensions, CI/CD pipelines, transitive dependencies, base images, and AI tools — everything external that touches your software.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Real-world attacks</div>
+            <div class="step-desc">SolarWinds (18,000 organizations compromised), Bybit ($1.5B theft via wallet software), and recent malicious package campaigns.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Common attack vectors</div>
+            <div class="step-desc">Typosquatting, dependency confusion, malicious injection, repo/package takeover, CI/CD poisoning, and code obfuscation techniques.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Malware analysis deep dive</div>
+            <div class="step-desc">How attackers layer obfuscation, steganography, and encoding across 12+ stages to hide malicious payloads in packages.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">AI agent risks</div>
+            <div class="step-desc">Over 36% of AI skills contain vulnerabilities. Skills can access files, shells, and credentials — treat them like untrusted third-party code.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Prevention strategies</div>
+            <div class="step-desc">Lock files, minimal release age policies, sandboxing, manual code review, and enterprise filtering tools.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <p style="font-size:13px;color:var(--muted)">After the presentation, we'll move into hands-on exercises where you'll fix real vulnerabilities and see defense mechanisms in action.</p>
+
+      <div class="nav-row">
+        <button class="btn btn-primary" onclick="showPhase(1)">Next → The Exploit Demo</button>
+      </div>
+    </div>
+
+    <!-- PANEL 1: THE EXPLOIT -->
+    <div class="panel" id="panel-1">
       <div class="panel-heading">
         <div class="panel-icon icon-warn">⚡</div>
         <div>
@@ -697,8 +772,8 @@
       </div>
     </div>
  
-    <!-- PANEL 1: HANDS-ON -->
-    <div class="panel" id="panel-1">
+    <!-- PANEL 2: HANDS-ON -->
+    <div class="panel" id="panel-2">
       <div class="panel-heading">
         <div class="panel-icon icon-blue">🔧</div>
         <div>
@@ -918,8 +993,8 @@
       </div>
     </div>
  
-    <!-- PANEL 2: Q&A -->
-    <div class="panel" id="panel-2">
+    <!-- PANEL 3: Q&A -->
+    <div class="panel" id="panel-3">
       <div class="panel-heading">
         <div class="panel-icon icon-green">💬</div>
         <div>
@@ -977,8 +1052,8 @@
       </div>
     </div>
  
-    <!-- PANEL 3: RESOURCES -->
-    <div class="panel" id="panel-3">
+    <!-- PANEL 4: RESOURCES -->
+    <div class="panel" id="panel-4">
       <div class="panel-heading">
         <div class="panel-icon icon-muted">📦</div>
         <div>
@@ -1111,8 +1186,8 @@
  
 <script>
   let currentPhase = 0;
-  const progressLabels = ['Act 1 of 4', 'Act 2 of 4', 'Act 3 of 4', 'Resources'];
-  const progressWidths = ['25%', '50%', '75%', '100%'];
+  const progressLabels = ['Presentation', 'Act 1 of 3', 'Act 2 of 3', 'Act 3 of 3', 'Resources'];
+  const progressWidths = ['20%', '40%', '60%', '80%', '100%'];
  
   function showPhase(n) {
     // Update timeline
@@ -1130,7 +1205,7 @@
     document.getElementById('progress-label').textContent = progressLabels[n];
  
     // Show scan widget during exercise
-    document.getElementById('scan-widget').style.display = (n === 1) ? 'block' : 'none';
+    document.getElementById('scan-widget').style.display = (n === 2) ? 'block' : 'none';
  
     currentPhase = n;
   }
