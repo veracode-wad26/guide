@@ -701,56 +701,66 @@
         <div class="panel-icon icon-warn">⚡</div>
         <div>
           <h2>The Exploit, Live Demo</h2>
-          <div class="subtitle">Watch how a malicious package enters a supply chain undetected</div>
+          <div class="subtitle">SCA vulnerability → sandbox escape → package firewall block</div>
         </div>
       </div>
- 
-      <div class="callout warn">
-        <span class="callout-icon">⚠</span>
-        <span>This is a <strong>controlled demo</strong> using packages registered in the Veracode Package Firewall sandbox. Do not reproduce outside of this environment.</span>
-      </div>
- 
-      <p>Modern applications pull in hundreds of open-source packages. Most are legitimate. Some aren't. The attacker's goal is simple: get a malicious dependency into your build pipeline before anyone notices.</p>
- 
-      <h3>What you're about to see</h3>
+
+      <h3>Part 1 — SCA Scanner finds the vulnerability</h3>
+      <p style="margin-bottom:12px">The demo app ships with <strong>vm2 3.9.5</strong> — a JavaScript sandbox library. Run the OSV scanner to find all known CVEs in the dependencies:</p>
+
       <div class="steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
-            <div class="step-title">Normal app, running clean</div>
-            <div class="step-desc">The demo app boots and serves requests as expected. No alerts, no warnings.</div>
+            <div class="step-title">Run the SCA scan</div>
+            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">osv-scanner scan -r .</code> — finds 27 Critical CVEs in vm2 3.9.5 alone, including multiple sandbox escape vulnerabilities.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">Malicious package introduced</div>
-            <div class="step-desc">A dependency is added to <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">package.json</code>, a realistic typosquat that mimics a legitimate utility package.</div>
+            <div class="step-title">vm2 — a broken sandbox</div>
+            <div class="step-desc">vm2 is used to run untrusted JavaScript in isolation. But CVE-2023-29199 lets an attacker bypass the sandbox and execute arbitrary code on the host system.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <div class="step-title">Commit → Push → CI triggers</div>
-            <div class="step-desc">Without a firewall, this goes straight into the build. With Veracode Package Firewall, the install is blocked before it reaches your environment.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <div class="step-title">The block in the Veracode UI</div>
-            <div class="step-desc">Real-time alert: package name, risk reason, and which repo triggered it. This is what the Package Firewall policy catches.</div>
+            <div class="step-title">Live RCE exploit</div>
+            <div class="step-desc">One curl command breaks out of the sandbox, reads credentials off disk, and proves full system access. See the <a href="exploit-demo.html" target="_blank" style="color:var(--accent)">exploit demo page</a> for the full walkthrough.</div>
           </div>
         </div>
       </div>
- 
+
       <hr class="divider">
- 
-      <h3>The malicious packages (Firewall demo registry)</h3>
-      <p style="margin-bottom:14px">If your organization has a package firewall tool configured (JFrog, Sonatype, Artifactory, or similar), test it with a package of your choice:</p>
- 
+
+      <h3>Part 2 — Package Firewall blocks a malicious install</h3>
+      <p style="margin-bottom:12px">A package firewall blocks <strong>malicious packages</strong> — typosquats, supply chain attacks, intentionally backdoored packages. It does not fix CVEs; that's what the SCA scanner is for.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Attempt to install a malicious package</div>
+            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">npm install @veracode/firewall-demo@1.0.0</code> — this package is registered as a known malicious demo package. Your firewall should block it immediately.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">The block</div>
+            <div class="step-desc">The install fails with a 403. The firewall caught it before it touched your environment. No code ran, nothing was installed.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout warn">
+        <span class="callout-icon">⚠</span>
+        <span>Check with your security team before running the firewall test — the block will trigger an alert in your security tooling.</span>
+      </div>
+
       <div class="nav-row">
-        <button class="btn btn-primary" onclick="showPhase(1)">Next → Hands-On Exercise</button>
+        <button class="btn btn-primary" onclick="showPhase(2)">Next → Hands-On Exercise</button>
       </div>
     </div>
  

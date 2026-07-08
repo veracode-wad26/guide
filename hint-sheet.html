@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Hint Sheet</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --border: #232736;
+    --accent: #5b8aff;
+    --warn: #ff6b35;
+    --green: #3dd68c;
+    --text: #e2e6f0;
+    --muted: #7a8099;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 40px;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+    color: #000;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    color: #000;
+    border-bottom: 2px solid #5b8aff;
+    padding-bottom: 6px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .repo-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f9f9f9;
+  }
+
+  .repo-name {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #5b8aff;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .repo-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .repo-desc {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  .vuln-item {
+    font-size: 12px;
+    font-family: var(--mono);
+    color: #333;
+    margin-bottom: 4px;
+    padding-left: 12px;
+  }
+
+  .vuln-item:before {
+    content: "• ";
+    color: #ff6b35;
+  }
+
+  .code-block {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    margin: 10px 0;
+    overflow-x: auto;
+  }
+
+  .command {
+    display: block;
+    margin: 8px 0;
+  }
+
+  .troubleshoot {
+    margin: 12px 0;
+    padding-left: 16px;
+  }
+
+  .troubleshoot-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .troubleshoot-desc {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .col {
+    flex: 1;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 12px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  th {
+    background: #f0f0f0;
+    font-weight: 600;
+  }
+
+  @media print {
+    body { padding: 20px; font-size: 12px; }
+    h1 { font-size: 20px; }
+    h2 { font-size: 14px; margin-top: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Workshop Hint Sheet</h1>
+<div class="subtitle">Quick reference for the hands-on exercise</div>
+
+<h2>The Three Repos</h2>
+<div class="grid">
+  <div class="repo-card">
+    <div class="repo-name">JAVASCRIPT</div>
+    <div class="repo-title"><a href="https://github.com/veracode-wad26/verademo-javascript-api" target="_blank" style="color:#5b8aff;text-decoration:none">verademo-javascript-api</a></div>
+    <div class="repo-desc">Node/Express REST API with vulnerable npm dependencies</div>
+    <div class="vuln-item">lodash 4.17.15 — Command Injection</div>
+    <div class="vuln-item">express — XSS via response.redirect()</div>
+    <div class="vuln-item">vm2 — Sandbox Breakout</div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">PYTHON</div>
+    <div class="repo-title"><a href="https://github.com/veracode-wad26/verademo-python" target="_blank" style="color:#5b8aff;text-decoration:none">verademo-python</a></div>
+    <div class="repo-desc">Django forum app with vulnerable requirements.txt</div>
+    <div class="vuln-item">django-rest-framework v0.1.0 — XSS Vulnerability</div>
+    <div class="vuln-item">httplib2 — ReDoS</div>
+    <div class="vuln-item">sqlparse — Denial of Service</div>
+  </div>
+
+  <div class="repo-card">
+    <div class="repo-name">JAVA</div>
+    <div class="repo-title"><a href="https://github.com/veracode-wad26/verademo-java" target="_blank" style="color:#5b8aff;text-decoration:none">verademo-java</a></div>
+    <div class="repo-desc">Spring/Maven web app with documented exploits</div>
+    <div class="vuln-item">commons-collections4 — Insecure Deserialization</div>
+    <div class="vuln-item">spring-framework — Remote Code Execution</div>
+    <div class="vuln-item">snakeyaml — Denial of Service</div>
+  </div>
+</div>
+
+<h2>Getting Started</h2>
+
+<p style="font-size:12px;color:#666;margin-bottom:16px">After forking a repo from "The Three Repos" above, clone and checkout the participant-start branch:</p>
+
+<strong>Step 1: Clone and checkout JavaScript:</strong>
+<div class="code-block">
+<span class="command">git clone https://github.com/YOUR-USERNAME/verademo-javascript-api.git</span>
+<span class="command">cd verademo-javascript-api && git checkout participant-start</span>
+</div>
+
+<strong>Step 2: Clone and checkout Python:</strong>
+<div class="code-block">
+<span class="command">git clone https://github.com/YOUR-USERNAME/verademo-python.git</span>
+<span class="command">cd verademo-python && git checkout participant-start</span>
+</div>
+
+<strong>Step 3: Clone and checkout Java:</strong>
+<div class="code-block">
+<span class="command">git clone https://github.com/YOUR-USERNAME/verademo-java.git</span>
+<span class="command">cd verademo-java && git checkout participant-start</span>
+</div>
+
+<h2>Scanning Commands</h2>
+
+<div class="two-col">
+  <div class="col">
+    <strong>Install OSV Scanner:</strong>
+    <div class="code-block">
+      <span class="command"># macOS</span>
+      <span class="command">brew install osv-scanner</span>
+      <span class="command"># Windows</span>
+      <span class="command">winget install Google.OSVScanner</span>
+    </div>
+  </div>
+  <div class="col">
+    <strong>Run a scan:</strong>
+    <div class="code-block">
+      <span class="command">osv-scanner scan -r .</span>
+      <span class="command"># For JSON output:</span>
+      <span class="command">osv-scanner scan -r -f json .</span>
+    </div>
+  </div>
+</div>
+
+<h2>Manifest Files</h2>
+<table>
+  <tr>
+    <th>Language</th>
+    <th>Manifest</th>
+    <th>Install Command</th>
+  </tr>
+  <tr>
+    <td>JavaScript</td>
+    <td>package.json</td>
+    <td>npm install</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>requirements.txt</td>
+    <td>pip install -r requirements.txt</td>
+  </tr>
+  <tr>
+    <td>Java</td>
+    <td>pom.xml</td>
+    <td>mvn install</td>
+  </tr>
+</table>
+
+<h2>Fixing Vulnerabilities</h2>
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Step 1: Identify vulnerable versions</div>
+  <div class="troubleshoot-desc">Run OSV Scanner and note the CVEs and vulnerable package versions</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Step 2: Update the manifest</div>
+  <div class="troubleshoot-desc">Bump each vulnerable package to the safe version listed in the scan output</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Step 3: Verify locally</div>
+  <div class="troubleshoot-desc">Run tests to ensure the app still works after updates</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Step 4: Push your changes</div>
+  <div class="troubleshoot-desc">Commit and push — GitHub Actions will scan and update the leaderboard</div>
+</div>
+
+<h2>Common Issues</h2>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">OSV Scanner shows findings I didn't fix</div>
+  <div class="troubleshoot-desc">Check for transitive dependencies. A package you kept may pull in a vulnerable version indirectly. Look at the full audit output and bump the parent package version.</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Tests fail after updating dependencies</div>
+  <div class="troubleshoot-desc">A major version bump may have breaking changes. Try a minor version bump first, or check the package changelog for migration guidance.</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">Package not found during install</div>
+  <div class="troubleshoot-desc">Make sure you're using the correct package name and version. Double-check the manifest for typos or version constraints.</div>
+</div>
+
+<div class="troubleshoot">
+  <div class="troubleshoot-title">GitHub Actions scan is still running</div>
+  <div class="troubleshoot-desc">Check the Actions tab in your fork. If it's stuck, try pushing another commit or check for errors in the workflow logs.</div>
+</div>
+
+<h2>Quick Commands</h2>
+<div class="code-block">
+<span class="command"># Verify your changes locally before pushing</span>
+<span class="command">osv-scanner scan -r .</span>
+<span class="command"></span>
+<span class="command"># Commit and push</span>
+<span class="command">git add requirements.txt  # (or package.json / pom.xml)</span>
+<span class="command">git commit -m "fix: update vulnerable dependencies"</span>
+<span class="command">git push</span>
+<span class="command"></span>
+<span class="command"># Check results on the leaderboard</span>
+<span class="command"># Look at the guide's leaderboard widget or check Actions tab in GitHub</span>
+</div>
+
+</body>
+</html>
