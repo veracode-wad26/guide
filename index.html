@@ -936,32 +936,59 @@
 
         <hr class="divider">
         <h3 style="margin-bottom:10px">🎯 Bonus, Test Your Package Firewall</h3>
-        <p style="margin-bottom:12px">Once you have a green scan, test your organization's package firewall by adding a known malicious or flagged package to your manifest. The firewall should block it in CI based on your configured policy.</p>
+        <p style="margin-bottom:12px">Once you have a green scan, pick a package firewall tool and test it by blocking a known risky package. Either set one up locally (free tier) or check what your company already uses.</p>
 
-        <p style="margin-bottom:12px;color:var(--muted);font-size:13px">Example packages often flagged by package firewalls (choose one for your ecosystem):</p>
+        <p style="margin-bottom:12px;color:var(--muted);font-size:13px"><strong>Popular package firewall tools (pick one):</strong></p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;font-size:12px">
+            <div style="font-weight:600;margin-bottom:4px">Aikido</div>
+            <div style="color:var(--muted);font-size:11px;margin-bottom:6px">Open source, free tier available. Multi-ecosystem support.</div>
+            <a href="https://github.com/AikidoSec/safe-chain" target="_blank" style="color:var(--accent);text-decoration:none;font-size:11px">github.com/AikidoSec/safe-chain &#8599;</a>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;font-size:12px">
+            <div style="font-weight:600;margin-bottom:4px">Veracode</div>
+            <div style="color:var(--muted);font-size:11px;margin-bottom:6px">Enterprise SCA with package firewall. Check if your company uses it.</div>
+            <a href="https://www.veracode.com/products/veracode-package-firewall/" target="_blank" style="color:var(--accent);text-decoration:none;font-size:11px">veracode.com/products/package-firewall &#8599;</a>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;font-size:12px">
+            <div style="font-weight:600;margin-bottom:4px">Sonatype</div>
+            <div style="color:var(--muted);font-size:11px;margin-bottom:6px">Open source malware protection and repository management.</div>
+            <a href="https://www.sonatype.com/solutions/open-source-malware-protection" target="_blank" style="color:var(--accent);text-decoration:none;font-size:11px">sonatype.com/solutions/malware-protection &#8599;</a>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px;font-size:12px">
+            <div style="font-weight:600;margin-bottom:4px">JFrog Xray</div>
+            <div style="color:var(--muted);font-size:11px;margin-bottom:6px">Artifact analysis and firewall. Free community edition available.</div>
+            <a href="https://jfrog.com/xray/" target="_blank" style="color:var(--accent);text-decoration:none;font-size:11px">jfrog.com/xray &#8599;</a>
+          </div>
+        </div>
+
+        <p style="margin-bottom:12px;color:var(--muted);font-size:13px"><strong>Test with a known risky package:</strong></p>
 
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span class="comment"># npm - add a flagged package to package.json dependencies:</span><br>
-          <span class="str">"eslint-scope"</span>: <span class="str">"3.7.1"</span>&nbsp;&nbsp;<span class="comment">// known malicious version from 2018</span><br><br>
-          <span class="comment"># or try a package flagged in your org's policy</span><br><br>
+          <span class="comment"># npm - add to package.json dependencies:</span><br>
+          <span class="str">"eslint-scope"</span>: <span class="str">"3.7.1"</span>&nbsp;&nbsp;<span class="comment">// malicious version, widely blocked</span><br><br>
           <span class="comment"># pypi - add to requirements.txt:</span><br>
-          <span class="comment"># Choose a package flagged by your firewall policy</span><br><br>
+          <span class="comment"># Check your firewall's blocked list or known malicious packages</span><br><br>
           <span class="comment"># maven - add to pom.xml:</span><br>
-          <span class="comment">&lt;!-- Choose a dependency flagged by your firewall policy --&gt;</span>
+          <span class="comment">&lt;!-- Use a package your firewall flags as risky --&gt;</span>
         </div>
 
         <div class="callout info">
           <span class="callout-icon">ℹ</span>
-          <span>Work with your security or platform team to identify which packages trigger your organization's firewall. This exercise teaches you how policy enforcement works in practice—blocking risky dependencies before they reach production.</span>
+          <span><strong>If your company has a firewall:</strong> Ask your platform or security team which packages are flagged. <strong>If setting up locally:</strong> Try Aikido (open source) or a free tier. This teaches you how policy enforcement blocks risky dependencies before they reach production.</span>
         </div>
 
         <div class="checklist" style="margin-top:12px">
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Add a flagged package (from your org's firewall policy or a known case) to your manifest
+            <input type="checkbox"> Identify or set up a package firewall tool
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Commit and push, watch your package firewall block it in CI
+            <input type="checkbox"> Add a known risky package to your manifest
+          </label>
+          <label class="check-item" onclick="toggleCheck(this)">
+            <input type="checkbox"> Commit and push, watch the firewall block it
           </label>
         </div>
       </div>
