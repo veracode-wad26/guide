@@ -747,25 +747,7 @@
       <hr class="divider">
  
       <h3>The malicious packages (Firewall demo registry)</h3>
-      <p style="margin-bottom:14px">These are pre-configured in the workshop's Package Firewall policy across six ecosystems:</p>
- 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px">
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">NPM</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">@veracode/firewall-demo</div>
-          <a href="https://www.npmjs.com/package/@veracode/firewall-demo" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">npmjs.com &#8599;</a>
-        </div>
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">PYPI</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">veracode-firewall-demo</div>
-          <a href="https://pypi.org/project/veracode-firewall-demo/" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">pypi.org &#8599;</a>
-        </div>
-        <div style="border:1px solid var(--border);border-radius:5px;padding:10px 12px">
-          <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px">MAVEN</div>
-          <div style="font-family:var(--mono);font-size:12px;color:var(--text);margin-bottom:4px">com.veracode.firewall:firewall-demo</div>
-          <a href="https://central.sonatype.com/artifact/com.veracode.firewall/firewall-demo" target="_blank" style="font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none">central.sonatype.com &#8599;</a>
-        </div>
-      </div>
+      <p style="margin-bottom:14px">If your organization has a package firewall tool configured (JFrog, Sonatype, Artifactory, or similar), test it with a package of your choice:</p>
  
       <div class="nav-row">
         <button class="btn btn-primary" onclick="showPhase(1)">Next → Hands-On Exercise</button>
@@ -883,9 +865,7 @@
           <span style="color:var(--warn)">CRITICAL</span> · CVE-2021-23337 · <span style="color:#fff">lodash 4.17.20</span><br>
           <span style="color:#3d4a6b">  Command injection via _.template(). Fix: bump to 4.17.21</span><br><br>
           <span style="color:var(--warn)">HIGH</span> &nbsp;&nbsp;&nbsp;· CVE-2023-45857 · <span style="color:#fff">axios 0.21.1</span><br>
-          <span style="color:#3d4a6b">  CSRF via forged headers. Fix: bump to 1.6.0</span><br><br>
-          <span style="color:#ff6b35;opacity:0.6">MALICIOUS</span> · <span style="color:#fff">@veracode/firewall-demo 1.0.0</span><br>
-          <span style="color:#3d4a6b">  🎯 Bonus challenge: see below</span>
+          <span style="color:#3d4a6b">  CSRF via forged headers. Fix: bump to 1.6.0</span>
         </div>
  
         <hr class="divider">
@@ -955,34 +935,33 @@
         </div>
 
         <hr class="divider">
-        <h3 style="margin-bottom:10px">🎯 Bonus, Trigger the Package Firewall</h3>
-        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push, watch the Package Firewall block it in CI.</p>
+        <h3 style="margin-bottom:10px">🎯 Bonus, Test Your Package Firewall</h3>
+        <p style="margin-bottom:12px">Once you have a green scan, test your organization's package firewall by adding a known malicious or flagged package to your manifest. The firewall should block it in CI based on your configured policy.</p>
+
+        <p style="margin-bottom:12px;color:var(--muted);font-size:13px">Example packages often flagged by package firewalls (choose one for your ecosystem):</p>
 
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span class="comment"># npm, add to package.json dependencies:</span><br>
-          <span class="str">"@veracode/firewall-demo"</span>: <span class="str">"1.0.0"</span><br><br>
-          <span class="comment"># pypi, add to requirements.txt:</span><br>
-          veracode-firewall-demo==0.1.0<br><br>
-          <span class="comment"># maven, add to pom.xml:</span><br>
-          &lt;<span class="kw">dependency</span>&gt;<br>
-          &nbsp;&nbsp;&lt;<span class="kw">groupId</span>&gt;com.veracode.firewall&lt;/<span class="kw">groupId</span>&gt;<br>
-          &nbsp;&nbsp;&lt;<span class="kw">artifactId</span>&gt;firewall-demo&lt;/<span class="kw">artifactId</span>&gt;<br>
-          &nbsp;&nbsp;&lt;<span class="kw">version</span>&gt;1.0.0&lt;/<span class="kw">version</span>&gt;<br>
-          &lt;/<span class="kw">dependency</span>&gt;
+          <span class="comment"># npm - add a flagged package to package.json dependencies:</span><br>
+          <span class="str">"eslint-scope"</span>: <span class="str">"3.7.1"</span>&nbsp;&nbsp;<span class="comment">// known malicious version from 2018</span><br><br>
+          <span class="comment"># or try a package flagged in your org's policy</span><br><br>
+          <span class="comment"># pypi - add to requirements.txt:</span><br>
+          <span class="comment"># Choose a package flagged by your firewall policy</span><br><br>
+          <span class="comment"># maven - add to pom.xml:</span><br>
+          <span class="comment">&lt;!-- Choose a dependency flagged by your firewall policy --&gt;</span>
         </div>
 
-        <div class="callout warn">
-          <span class="callout-icon">⚠</span>
-          <span>These are <strong>safe Veracode demo packages</strong> on public registries, no malicious code will run. The firewall blocks them purely based on policy.</span>
+        <div class="callout info">
+          <span class="callout-icon">ℹ</span>
+          <span>Work with your security or platform team to identify which packages trigger your organization's firewall. This exercise teaches you how policy enforcement works in practice—blocking risky dependencies before they reach production.</span>
         </div>
 
         <div class="checklist" style="margin-top:12px">
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Add the demo malicious package for your ecosystem to your manifest
+            <input type="checkbox"> Add a flagged package (from your org's firewall policy or a known case) to your manifest
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Commit and push, watch the Package Firewall block it in CI
+            <input type="checkbox"> Commit and push, watch your package firewall block it in CI
           </label>
         </div>
       </div>
@@ -1156,7 +1135,7 @@
           <div class="lb-badge">🥇</div>
         </div>
       </div>
-      <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">First to green scan + passing tests wins. Bonus: identify the malicious package from Act 1.</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:10px;line-height:1.5">First to green scan + passing tests wins. Bonus: test your package firewall by triggering a block.</div>
     </div>
  
     <div class="sidebar-widget">
