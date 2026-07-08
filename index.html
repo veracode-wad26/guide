@@ -1129,6 +1129,83 @@
         </div>
       </div>
  
+      <hr class="divider">
+
+      <h3>Tips for prevention</h3>
+
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Use lock files</div>
+            <div class="step-desc">If you're using NPM, PyPI, Cargo etc. where dependency requirements resolve up, commit your lock file. Different machines can otherwise build different versions due to caching, causing unexpected behaviour. Lock files are also required for SCA tools to work effectively. For ecosystems where requirements don't resolve up (e.g. NuGet), less critical but still a good idea.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Package firewall</div>
+            <div class="step-desc">Enterprise solutions like <a href="https://www.veracode.com/products/veracode-package-firewall/" target="_blank" style="color:var(--accent);text-decoration:none">Veracode</a>, <a href="https://www.sonatype.com/solutions/open-source-malware-protection" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype</a>, <a href="https://jfrog.com/xray/" target="_blank" style="color:var(--accent);text-decoration:none">JFrog</a> and open source options like <a href="https://github.com/AikidoSec/safe-chain" target="_blank" style="color:var(--accent);text-decoration:none">Aikido Safe Chain</a> filter packages before they're downloaded. Blocks malicious packages at the point of install, before they reach your environment.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Use PNPM with minimumReleaseAge</div>
+            <div class="step-desc">Set <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">minimumReleaseAge:2880</code> (2 days). Malware lifespan is usually short, so a short quarantine period catches a lot. Similar features available in NPM (11.10+) and Yarn (4.10+).</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">NPM with --ignore-scripts</div>
+            <div class="step-desc"><code style="font-family:var(--mono);font-size:12px;color:var(--accent)">npm install --ignore-scripts</code> prevents install hooks from running automatically. Your ESB build might fail, but you can review scripts case by case with <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">--foreground-scripts</code>.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">Use a VM, Docker, or GitHub Codespaces</div>
+            <div class="step-desc">Isolate untrusted code in a container or ephemeral environment. Codespaces are easy to create and destroy, designed for exactly this. Don't grant additional repo access. VMs aren't bulletproof (escape risk with integrations) but sandboxes like gVisor are used by OpenSSF for suspected malicious packages. Many malicious packages abort if they detect a VM, so still useful.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Manual code review (last resort)</div>
+            <div class="step-desc">Time intensive and not always practical. NPM projects can have thousands of dependencies and malicious changes can be very subtle: hidden characters, whitespace padding followed by buried payloads, dependency replacement attacks (malicious forks with the same name and version). Look for exec calls and install hooks (scripts that run automatically when a package is installed).</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Key takeaways</h3>
+
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
+          <div class="step-body">
+            <div class="step-title">Trust is the vulnerability</div>
+            <div class="step-desc">Attackers exploit the implicit trust developers place in open source packages. Common goals across all attacks: credential theft (API keys, tokens, SSH secrets), crypto theft, data exfiltration, CI/CD pipeline compromise, and prompt injection in LLMs. The same characteristics show up across npm packages, PyPI, Pickle files, IDE extensions and AI skills.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">🎉</div>
+          <div class="step-body">
+            <div class="step-title">Fun one: fake recruiter attacks</div>
+            <div class="step-desc">State actors posing as recruiters target developers, especially in crypto and blockchain. Fake interviews with a coding test that requires running a project locally. Never run unknown code outside a VM or sandbox.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">🔬</div>
+          <div class="step-body">
+            <div class="step-title">Interested in malware?</div>
+            <div class="step-desc">BSides events across the UK have a Malware Village. <a href="https://malwareandmonsters.com/" target="_blank" style="color:var(--accent);text-decoration:none">malwareandmonsters.com</a>, Defcon, Black Hat, OWASP. Browse real samples at <a href="https://opensourcemalware.com/" target="_blank" style="color:var(--accent);text-decoration:none">opensourcemalware.com</a> or analyse them at <a href="https://www.virustotal.com/gui/home/upload" target="_blank" style="color:var(--accent);text-decoration:none">VirusTotal</a>. Do not download malicious packages on your own machine. Contain them. Quite fun observing how they detonate.</div>
+          </div>
+        </div>
+      </div>
+
       <div class="nav-row">
         <button class="btn btn-ghost" onclick="showPhase(3)">← Back</button>
       </div>
