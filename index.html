@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Defending the Modern Supply Chain, Workshop Guide</title>
+<title>Defending the Modern Supply Chain — Workshop Guide</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
  
@@ -137,7 +137,7 @@
   .main {
     display: grid;
     grid-template-columns: 1fr 300px;
-    min-height: calc(100vh, 130px);
+    min-height: calc(100vh - 130px);
   }
  
   .content {
@@ -596,21 +596,26 @@
  
 <div class="timeline">
   <div class="phase active" onclick="showPhase(0)">
+    <div class="phase-label">Presentation</div>
+    <div class="phase-title">Supply Chain Overview</div>
+    <div class="phase-duration">20 min · Context</div>
+  </div>
+  <div class="phase" onclick="showPhase(1)">
     <div class="phase-label">Act 1</div>
     <div class="phase-title">The Exploit</div>
     <div class="phase-duration">15 min · Demo</div>
   </div>
-  <div class="phase" onclick="showPhase(1)">
+  <div class="phase" onclick="showPhase(2)">
     <div class="phase-label">Act 2</div>
     <div class="phase-title">Hands-On Fix</div>
     <div class="phase-duration">50 min · Exercise</div>
   </div>
-  <div class="phase" onclick="showPhase(2)">
+  <div class="phase" onclick="showPhase(3)">
     <div class="phase-label">Act 3</div>
     <div class="phase-title">Q&amp;A</div>
     <div class="phase-duration">25 min · Discussion</div>
   </div>
-  <div class="phase" onclick="showPhase(3)">
+  <div class="phase" onclick="showPhase(4)">
     <div class="phase-label">Resources</div>
     <div class="phase-title">Take-Aways</div>
     <div class="phase-duration">Keep &amp; share</div>
@@ -619,22 +624,94 @@
  
 <div class="main">
   <div class="content">
- 
-    <!-- PANEL 0: THE EXPLOIT -->
+
+    <!-- PANEL 0: PRESENTATION OVERVIEW -->
     <div class="panel active" id="panel-0">
+      <div class="panel-heading">
+        <div class="panel-icon icon-blue">📊</div>
+        <div>
+          <h2>Supply Chain Security Overview</h2>
+          <div class="subtitle">What we're covering in the presentation</div>
+        </div>
+      </div>
+
+      <h3>Why this matters</h3>
+      <p>62% of applications contain vulnerabilities from third-party libraries. Those vulnerabilities take an average of 358 days to fix. In 2025, <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype identified over 454,600 new malicious packages</a> across npm, PyPI, Maven, NuGet, and Hugging Face.</p>
+
+      <hr class="divider">
+
+      <h3>What we'll discuss</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Supply chain definition</div>
+            <div class="step-desc">Third-party SaaS, libraries, IDE extensions, CI/CD pipelines, transitive dependencies, base images, and AI tools — everything external that touches your software.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Real-world attacks</div>
+            <div class="step-desc">SolarWinds (18,000 organizations compromised), Bybit ($1.5B theft via wallet software), and recent malicious package campaigns.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Common attack vectors</div>
+            <div class="step-desc">Typosquatting, dependency confusion, malicious injection, repo/package takeover, CI/CD poisoning, and code obfuscation techniques.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Malware analysis deep dive</div>
+            <div class="step-desc">How attackers layer obfuscation, steganography, and encoding across 12+ stages to hide malicious payloads in packages.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">AI agent risks</div>
+            <div class="step-desc">Over 36% of AI skills contain vulnerabilities. Skills can access files, shells, and credentials — treat them like untrusted third-party code.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Prevention strategies</div>
+            <div class="step-desc">Lock files, minimal release age policies, sandboxing, manual code review, and enterprise filtering tools.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <p style="font-size:13px;color:var(--muted)">After the presentation, we'll move into hands-on exercises where you'll fix real vulnerabilities and see defense mechanisms in action.</p>
+
+      <div class="nav-row">
+        <button class="btn btn-primary" onclick="showPhase(1)">Next → The Exploit Demo</button>
+      </div>
+    </div>
+
+    <!-- PANEL 1: THE EXPLOIT -->
+    <div class="panel" id="panel-1">
       <div class="panel-heading">
         <div class="panel-icon icon-warn">⚡</div>
         <div>
-          <h2>The Exploit, Live Demo</h2>
+          <h2>The Exploit — Live Demo</h2>
           <div class="subtitle">Watch how a malicious package enters a supply chain undetected</div>
         </div>
       </div>
- 
+
       <div class="callout warn">
         <span class="callout-icon">⚠</span>
         <span>This is a <strong>controlled demo</strong> using packages registered in the Veracode Package Firewall sandbox. Do not reproduce outside of this environment.</span>
       </div>
- 
+
+      <p>We'll show the verademo-python application, exploit a real vulnerability from its dependency chain, and then remediate it. Then we'll demonstrate how the Package Firewall blocks malicious packages before they reach your environment.</p>
+
       <p>Modern applications pull in hundreds of open-source packages. Most are legitimate. Some aren't. The attacker's goal is simple: get a malicious dependency into your build pipeline before anyone notices.</p>
  
       <h3>What you're about to see</h3>
@@ -642,29 +719,29 @@
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
-            <div class="step-title">Normal app, running clean</div>
-            <div class="step-desc">The demo app boots and serves requests as expected. No alerts, no warnings.</div>
+            <div class="step-title">Live vulnerability exploit</div>
+            <div class="step-desc">The <a href="https://github.com/veracode-wad26/verademo-python" target="_blank" style="color:var(--accent);text-decoration:none">verademo-python</a> app running with a vulnerable dependency. We'll trigger a real attack to show the impact.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">Malicious package introduced</div>
-            <div class="step-desc">A dependency is added to <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">package.json</code>, a realistic typosquat that mimics a legitimate utility package.</div>
+            <div class="step-title">Remediation</div>
+            <div class="step-desc">Fix the vulnerability by updating the dependency version in requirements.txt. The attack no longer works.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
-            <div class="step-title">Commit → Push → CI triggers</div>
-            <div class="step-desc">Without a firewall, this goes straight into the build. With Veracode Package Firewall, the install is blocked before it reaches your environment.</div>
+            <div class="step-title">Malicious package introduced</div>
+            <div class="step-desc">A known malicious package is added to the manifest — mimicking a real supply chain attack.</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">4</div>
           <div class="step-body">
-            <div class="step-title">The block in the Veracode UI</div>
-            <div class="step-desc">Real-time alert: package name, risk reason, and which repo triggered it. This is what the Package Firewall policy catches.</div>
+            <div class="step-title">Package Firewall blocks it</div>
+            <div class="step-desc">The Package Firewall policy catches the malicious package before it's installed. No code execution, no compromise.</div>
           </div>
         </div>
       </div>
@@ -697,8 +774,8 @@
       </div>
     </div>
  
-    <!-- PANEL 1: HANDS-ON -->
-    <div class="panel" id="panel-1">
+    <!-- PANEL 2: HANDS-ON -->
+    <div class="panel" id="panel-2">
       <div class="panel-heading">
         <div class="panel-icon icon-blue">🔧</div>
         <div>
@@ -709,69 +786,66 @@
  
       <div class="callout info">
         <span class="callout-icon">ℹ</span>
-        <span>Fork one of the repos below to get your own copy. Create a Pull Request back to the original repo. Fix the vulnerable dependencies, push, and GitHub Actions runs an OSS scanner automatically. No Veracode account needed.</span>
+        <span>Fork one of the repos below to get your own copy. Fix the vulnerable dependencies, push, and GitHub Actions runs an OSS scanner automatically. No Veracode account needed.</span>
       </div>
  
-      <h3 style="margin-bottom:10px">Step 1, Fork your repo</h3>
-      <p style="margin-bottom:12px">Click the link for your ecosystem. GitHub creates a fork in your account, named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]</code>. Nobody else can push to it.</p>
+      <h3 style="margin-bottom:10px">Step 1 — Fork your repo</h3>
+      <p style="margin-bottom:12px">Click the link for your ecosystem. GitHub creates a fork in your account — named <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">verademo-[lang]</code>. Nobody else can push to it.</p>
  
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
         <a href="https://github.com/veracode-wad26/verademo-javascript-api/fork" target="_blank" onclick="selectRepo('js');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">📦</div>
           <div class="repo-badge badge-js" style="display:block;text-align:center;margin-bottom:8px">JavaScript</div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-javascript-api</div>
-          <div style="font-family:var(--mono);font-size:9px;color:#3dd68c;margin-top:8px">⬆ Easy</div>
         </a>
         <a href="https://github.com/veracode-wad26/verademo-python/fork" target="_blank" onclick="selectRepo('py');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">🐍</div>
           <div class="repo-badge badge-py" style="display:block;text-align:center;margin-bottom:8px">Python</div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-python</div>
-          <div style="font-family:var(--mono);font-size:9px;color:#5b8aff;margin-top:8px">→ Medium</div>
         </a>
         <a href="https://github.com/veracode-wad26/verademo-java/fork" target="_blank" onclick="selectRepo('java');return false;" style="text-decoration:none;border:1px solid var(--border);border-radius:7px;padding:14px;text-align:center;display:block;transition:border-color 0.15s" onmouseover="this.style.borderColor='#3a4060'" onmouseout="this.style.borderColor='var(--border)'">
           <div style="font-size:26px;margin-bottom:6px">☕</div>
           <div class="repo-badge badge-java" style="display:block;text-align:center;margin-bottom:8px">Java</div>
           <div style="font-family:var(--mono);font-size:10px;color:var(--muted)">veracode-wad26/<br>verademo-java</div>
-          <div style="font-family:var(--mono);font-size:9px;color:#ff6b35;margin-top:8px">⬇ Hard</div>
         </a>
       </div>
  
       <hr class="divider">
  
-      <h3 style="margin-bottom:8px">Step 2, Select your ecosystem</h3>
+      <h3 style="margin-bottom:8px">Step 2 — Select your ecosystem</h3>
       <p>Select which repo you forked so the rest of the guide updates for your language.</p>
  
       <div class="repo-grid">
         <div class="repo-card" id="repo-js" onclick="selectRepo('js')">
           <div class="repo-badge badge-js">JavaScript</div>
           <div class="repo-name">verademo-javascript-api</div>
-          <div class="repo-desc">Node/Express REST API for the Blab-a-Gag demo app. Intentionally vulnerable npm dependencies.</div>
+          <div class="repo-desc">Node/Express REST API with vulnerable npm dependencies from osv-scanner-baseline.</div>
           <div class="repo-vulns">
-            <span class="vuln-tag">injection</span>
-            <span class="vuln-tag">broken auth</span>
-            <span class="vuln-tag">SCA findings</span>
+            <span class="vuln-tag">lodash injection</span>
+            <span class="vuln-tag">express XSS</span>
+            <span class="vuln-tag">vm2 sandbox</span>
           </div>
           <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-javascript-api" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-javascript-api &#8599;</a></div>
         </div>
         <div class="repo-card" id="repo-py" onclick="selectRepo('py')">
           <div class="repo-badge badge-py">Python</div>
           <div class="repo-name">verademo-python</div>
-          <div class="repo-desc">Django forum app (Blab-a-Gag). Vulnerable requirements.txt with known CVEs in pinned deps.</div>
+          <div class="repo-desc">Django forum app with vulnerable dependencies from osv-scanner-baseline.</div>
           <div class="repo-vulns">
-            <span class="vuln-tag">SQLi</span>
-            <span class="vuln-tag">XSS</span>
-            <span class="vuln-tag">SCA findings</span>
+            <span class="vuln-tag">django-rest-framework XSS</span>
+            <span class="vuln-tag">httplib2 ReDoS</span>
+            <span class="vuln-tag">sqlparse DoS</span>
           </div>
           <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-python" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-python &#8599;</a></div>
         </div>
         <div class="repo-card" id="repo-java" onclick="selectRepo('java')">
           <div class="repo-badge badge-java">Java</div>
           <div class="repo-name">verademo-java</div>
-          <div class="repo-desc">Spring/Maven web app. Well-documented exploits, DEMO_NOTES included. Docker-ready.</div>
+          <div class="repo-desc">Spring/Maven web app with vulnerable dependencies from osv-scanner-baseline.</div>
           <div class="repo-vulns">
-            <span class="vuln-tag">deserialization</span>
-            <span class="vuln-tag">SQLi</span>
-            <span class="vuln-tag">SCA findings</span>
+            <span class="vuln-tag">commons-collections deserialization</span>
+            <span class="vuln-tag">spring RCE</span>
+            <span class="vuln-tag">snakeyaml DoS</span>
           </div>
           <div style="margin-top:10px;font-family:var(--mono);font-size:10px;color:var(--accent)"><a href="https://github.com/veracode-wad26/verademo-java" target="_blank" style="color:var(--accent);text-decoration:none">github.com/veracode-wad26/verademo-java &#8599;</a></div>
         </div>
@@ -779,7 +853,7 @@
  
       <div id="repo-instructions" style="display:none">
         <hr class="divider">
-        <h3 style="margin-bottom:14px">Step 2, Clone and open locally</h3>
+        <h3 style="margin-bottom:14px">Step 2 — Clone and open locally</h3>
         <p style="margin-bottom:10px">After forking, clone your fork to your machine and open in your preferred editor.</p>
         <div class="code-block" id="codespace-link" style="font-size:13px;padding-right:60px">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
@@ -787,11 +861,11 @@
         </div>
         <div class="callout info" style="margin-top:12px">
           <span class="callout-icon">ℹ</span>
-          <span>The <strong>participant-start</strong> branch is the default, the intentionally vulnerable version. All your changes will be on this branch.</span>
+          <span>Make sure you're on the <strong>participant-start</strong> branch — the intentionally vulnerable version. The <code style="font-family:var(--mono);font-size:12px">main</code> branch has the fixed reference — avoid it until after the exercise.</span>
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:6px">Step 3, Scan for vulnerabilities</h3>
+        <h3 style="margin-bottom:6px">Step 3 — Scan for vulnerabilities</h3>
         <p style="margin-bottom:10px">Run <strong>OSV Scanner</strong> locally to see all Critical and High findings in your repo.</p>
 
         <div class="code-block">
@@ -814,7 +888,7 @@
         </div>
  
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 4, Fix without breaking</h3>
+        <h3 style="margin-bottom:10px">Step 4 — Fix without breaking</h3>
         <p style="margin-bottom:12px">Edit only the dependency manifest. The app must still pass its test suite after your changes.</p>
  
         <div id="fix-checklist-wrap">
@@ -828,10 +902,13 @@
               <input type="checkbox"> Open <code style="font-family:var(--mono);font-size:11px;color:var(--accent)" id="manifest-inline">package.json</code> and find the vulnerable versions from SCAN-RESULTS.md
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Bump each dep to the safe version listed, do not change the rest
+              <input type="checkbox"> Bump each dep to the safe version listed — do not change the rest
             </label>
             <label class="check-item" onclick="toggleCheck(this)">
-              <input type="checkbox"> Commit and push, this triggers the Actions scan and updates the leaderboard
+              <input type="checkbox"> Run the test suite to confirm no regressions
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox"> Commit and push — this triggers the Actions scan and updates the leaderboard
             </label>
           </div>
         </div>
@@ -846,8 +923,8 @@
         </div>
 
         <hr class="divider">
-        <h3 style="margin-bottom:10px">Step 5, Push and watch the scan</h3>
-        <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically, no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
+        <h3 style="margin-bottom:10px">Step 5 — Push and watch the scan</h3>
+        <p style="margin-bottom:10px">Your push triggers the GitHub Actions workflow. An OSS scanner runs against your manifest automatically — no credentials needed. Check the <strong>Actions</strong> tab in your fork.</p>
  
         <div style="background:#0a0c10;border:1px solid var(--border);border-radius:6px;padding:14px 16px;font-family:var(--mono);font-size:12px;color:#b8c5e8;line-height:1.8;margin:10px 0">
           <span style="color:#3d4a6b"># What runs in Actions (all ecosystems)</span><br><br>
@@ -858,38 +935,38 @@
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0">
           <div style="border:1px solid var(--border);border-radius:6px;padding:12px 14px">
             <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">Still failing ❌</div>
-            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log, a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 4.</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">Check the job log — a dep may still be pinned to a vulnerable version, or a transitive is pulling in something old. Go back to step 4.</div>
           </div>
           <div style="border:1px solid rgba(61,214,140,0.2);border-radius:6px;padding:12px 14px;background:var(--green-dim)">
             <div style="font-family:var(--mono);font-size:10px;color:var(--green);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em">All clear ✅</div>
-            <div style="font-size:12px;color:#8fe8b4;line-height:1.6">Zero Critical/High findings. Raise your hand, you're on the leaderboard.</div>
+            <div style="font-size:12px;color:#8fe8b4;line-height:1.6">Zero Critical/High findings. Raise your hand — you're on the leaderboard.</div>
           </div>
         </div>
  
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>If you see findings you didn't expect, check for <strong>transitive dependencies</strong>, a package you kept may pull in a vulnerable version indirectly. Look at the full audit output, not just the top-level deps.</span>
+          <span>If you see findings you didn't expect, check for <strong>transitive dependencies</strong> — a package you kept may pull in a vulnerable version indirectly. Look at the full audit output, not just the top-level deps.</span>
         </div>
  
         <hr class="divider">
         <h3 style="margin-bottom:10px">The Veracode moment</h3>
-        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector, showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
+        <p style="margin-bottom:10px">Once a few people have green scans, Patrick will run a <strong>real Veracode SCA scan</strong> live on the projector — showing before and after in the Veracode UI. This is what the OSS scanner is approximating: the same CVE database, the same severity ratings, with reachability analysis and fix advice layered on top.</p>
         <div class="callout success">
           <span class="callout-icon">✓</span>
-          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em>, reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
+          <span>The OSS scanner tells you <em>what</em> is vulnerable. Veracode tells you <em>what matters</em> — reachable findings, fix prioritisation, policy enforcement across your whole portfolio.</span>
         </div>
 
         <hr class="divider">
-        <h3 style="margin-bottom:10px">🎯 Bonus, Trigger the Package Firewall</h3>
-        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push, watch the Package Firewall block it in CI.</p>
+        <h3 style="margin-bottom:10px">🎯 Bonus — Trigger the Package Firewall</h3>
+        <p style="margin-bottom:12px">Once you have a green scan, go further. Add the Veracode demo malicious package to your manifest and push — watch the Package Firewall block it in CI.</p>
 
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">copy</button>
-          <span class="comment"># npm, add to package.json dependencies:</span><br>
+          <span class="comment"># npm — add to package.json dependencies:</span><br>
           <span class="str">"@veracode/firewall-demo"</span>: <span class="str">"1.0.0"</span><br><br>
-          <span class="comment"># pypi, add to requirements.txt:</span><br>
+          <span class="comment"># pypi — add to requirements.txt:</span><br>
           veracode-firewall-demo==0.1.0<br><br>
-          <span class="comment"># maven, add to pom.xml:</span><br>
+          <span class="comment"># maven — add to pom.xml:</span><br>
           &lt;<span class="kw">dependency</span>&gt;<br>
           &nbsp;&nbsp;&lt;<span class="kw">groupId</span>&gt;com.veracode.firewall&lt;/<span class="kw">groupId</span>&gt;<br>
           &nbsp;&nbsp;&lt;<span class="kw">artifactId</span>&gt;firewall-demo&lt;/<span class="kw">artifactId</span>&gt;<br>
@@ -899,7 +976,7 @@
 
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>These are <strong>safe Veracode demo packages</strong> on public registries, no malicious code will run. The firewall blocks them purely based on policy.</span>
+          <span>These are <strong>safe Veracode demo packages</strong> on public registries — no malicious code will run. The firewall blocks them purely based on policy.</span>
         </div>
 
         <div class="checklist" style="margin-top:12px">
@@ -907,7 +984,7 @@
             <input type="checkbox"> Add the demo malicious package for your ecosystem to your manifest
           </label>
           <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox"> Commit and push, watch the Package Firewall block it in CI
+            <input type="checkbox"> Commit and push — watch the Package Firewall block it in CI
           </label>
         </div>
       </div>
@@ -918,13 +995,13 @@
       </div>
     </div>
  
-    <!-- PANEL 2: Q&A -->
-    <div class="panel" id="panel-2">
+    <!-- PANEL 3: Q&A -->
+    <div class="panel" id="panel-3">
       <div class="panel-heading">
         <div class="panel-icon icon-green">💬</div>
         <div>
           <h2>Q&amp;A + Best Practices</h2>
-          <div class="subtitle">Open discussion, Boy Baukema leads</div>
+          <div class="subtitle">Open discussion — Boy Baukema leads</div>
         </div>
       </div>
  
@@ -944,14 +1021,14 @@
         <div class="step">
           <div class="step-num">②</div>
           <div class="step-body">
-            <div class="step-title">Blocking vs. alerting, what's right for your pipeline?</div>
+            <div class="step-title">Blocking vs. alerting — what's right for your pipeline?</div>
             <div class="step-desc">Hard blocks in CI slow dev teams. Alerting without action creates noise. How do you find the right policy for your risk tolerance?</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">③</div>
           <div class="step-body">
-            <div class="step-title">Breaking changes when remediating, how do you manage this?</div>
+            <div class="step-title">Breaking changes when remediating — how do you manage this?</div>
             <div class="step-desc">Major version bumps break APIs. Strategies: test coverage first, pin transitives, use Veracode Fix for automated suggestions.</div>
           </div>
         </div>
@@ -977,8 +1054,8 @@
       </div>
     </div>
  
-    <!-- PANEL 3: RESOURCES -->
-    <div class="panel" id="panel-3">
+    <!-- PANEL 4: RESOURCES -->
+    <div class="panel" id="panel-4">
       <div class="panel-heading">
         <div class="panel-icon icon-muted">📦</div>
         <div>
@@ -987,7 +1064,97 @@
         </div>
       </div>
  
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px">
+      <h3>Key takeaways</h3>
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
+          <div class="step-body">
+            <div class="step-title">The supply chain is your responsibility</div>
+            <div class="step-desc">62% of applications contain vulnerabilities from third-party libraries. You own the risk from every package you import, regardless of who wrote it.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
+          <div class="step-body">
+            <div class="step-title">Malicious packages are a real threat</div>
+            <div class="step-desc"><a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">454,600+ new malicious packages identified in 2025</a>. Attack vectors include typosquatting, dependency confusion, and code obfuscation across 12+ layers.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">⊕</div>
+          <div class="step-body">
+            <div class="step-title">Use lock files and minimal release age policies</div>
+            <div class="step-desc">Lock files prevent surprise dependency changes. Enforce a minimum release age (e.g., pnpm minimumReleaseAge:2880) to reduce exposure to newly published malware.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">⊕</div>
+          <div class="step-body">
+            <div class="step-title">Layer your defenses: scanning + filtering</div>
+            <div class="step-desc">SCA tells you what's vulnerable. Package filtering stops malicious packages before install. Use both: shift-left scanning in dev, policy enforcement in CI/CD.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num" style="background:var(--green-dim);border-color:var(--green);color:var(--green)">✓</div>
+          <div class="step-body">
+            <div class="step-title">Remediation first, detection second</div>
+            <div class="step-desc">Prioritize by reachability. Fix via version bump where possible. Track progress over time. A long backlog isn't a security program.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Prevention strategies</h3>
+      <div class="steps" style="margin-top:12px">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Use lock files</div>
+            <div class="step-desc">npm, PyPI, Cargo, NuGet — lock files prevent surprise dependency changes and are required for SCA tools to work effectively.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Enforce minimum release age</div>
+            <div class="step-desc">pnpm: minimumReleaseAge:2880. npm 11.10+ and Yarn 4.10+ have similar features. Malware lifespan is usually short.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Disable install scripts when possible</div>
+            <div class="step-desc">npm --ignore-scripts. ESB build might fail, but evaluate case by case. Look for exec calls and install hooks.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Sandbox installations</div>
+            <div class="step-desc">Use VM, Docker, or GitHub Codespaces. Easy to create/destroy and designed to isolate untrusted code. Malware often aborts if VM detected.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">Manual code review</div>
+            <div class="step-desc">Time-intensive but catches hidden malice. Look for obfuscated code, hidden characters, whitespace padding, and unusual package behavior.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Enterprise package filtering</div>
+            <div class="step-desc">Veracode Package Firewall or equivalent. Blocks packages before download based on policy.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <h3>Resources</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div class="sidebar-widget" style="margin:0">
           <div class="widget-title">Workshop Repos</div>
           <div style="font-family:var(--mono);font-size:12px;line-height:2;color:var(--text)">
@@ -997,37 +1164,12 @@
           </div>
         </div>
         <div class="sidebar-widget" style="margin:0">
-          <div class="widget-title">Veracode Docs</div>
+          <div class="widget-title">Further Reading</div>
           <div style="font-size:13px;line-height:1.9;color:var(--text)">
-            <a href="https://docs.veracode.com" style="color:var(--accent);text-decoration:none">docs.veracode.com</a><br>
-            SCA Agent-Based Scanning<br>
-            Package Firewall Policy Guide<br>
-            Pipeline Scan CLI Reference
-          </div>
-        </div>
-      </div>
- 
-      <h3>Key concepts from today</h3>
-      <div class="steps" style="margin-top:12px">
-        <div class="step">
-          <div class="step-num" style="background:var(--warn-dim);border-color:var(--warn);color:var(--warn)">!</div>
-          <div class="step-body">
-            <div class="step-title">SCA is not optional</div>
-            <div class="step-desc">Your app is 80%+ open-source code by dependency count. You own the risk from every package you import, whether you wrote it or not.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num" style="background:var(--accent-dim);border-color:var(--accent);color:var(--accent)">⊕</div>
-          <div class="step-body">
-            <div class="step-title">Shift left, not shift all responsibility left</div>
-            <div class="step-desc">Put SCA in the IDE and the PR, but back it up with pipeline policy. Developers need guardrails, not gates.</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num" style="background:var(--green-dim);border-color:var(--green);color:var(--green)">✓</div>
-          <div class="step-body">
-            <div class="step-title">Remediation is the end goal, not detection</div>
-            <div class="step-desc">A long vuln backlog isn't a security program. Prioritise by reachability, fix by version bump where possible, track progress over time.</div>
+            <a href="https://www.sonatype.com/state-of-the-software-supply-chain/introduction" target="_blank" style="color:var(--accent);text-decoration:none">Sonatype Report &#8599;</a><br>
+            <a href="https://www.veracode.com/resources/analyst-reports/state-of-software-security-2026/" target="_blank" style="color:var(--accent);text-decoration:none">2026 State of Software Security &#8599;</a><br>
+            <a href="https://github.com/google/osv-scanner" target="_blank" style="color:var(--accent);text-decoration:none">OSV Scanner &#8599;</a><br>
+            <a href="https://docs.veracode.com" target="_blank" style="color:var(--accent);text-decoration:none">Veracode Docs &#8599;</a>
           </div>
         </div>
       </div>
@@ -1058,17 +1200,10 @@
         <span style="font-size:12px;color:var(--muted);margin-left:auto" id="scan-count">awaiting push</span>
       </div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6">
-        Google's OSV Scanner runs on pull request back to the original repo. No Veracode account needed. Run OSV locally or in a GitHub CodeSpace.<br><br>
-        <strong style="color:var(--text);display:block;margin-bottom:8px">Download OSV Scanner:</strong>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_darwin_amd64" style="color:var(--accent);text-decoration:none">macOS Intel</a><br>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_darwin_arm64" style="color:var(--accent);text-decoration:none">macOS Apple Silicon</a><br>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_linux_amd64" style="color:var(--accent);text-decoration:none">Linux x86-64</a><br>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_linux_arm64" style="color:var(--accent);text-decoration:none">Linux ARM64</a><br>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_windows_amd64.exe" style="color:var(--accent);text-decoration:none">Windows x86-64</a><br>
-        <a href="https://github.com/google/osv-scanner/releases/download/v2.4.0/osv-scanner_windows_arm64.exe" style="color:var(--accent);text-decoration:none">Windows ARM64</a>
-      </div>
-      <div style="background:rgba(255,107,53,0.08);border:1px solid rgba(255,107,53,0.2);border-radius:5px;padding:10px;margin-top:12px;font-size:11px;line-height:1.5">
-        <strong style="color:#ffb89a">⚠ Maven projects:</strong> osv-scanner may hit Maven Central rate limits (HTTP 429) when resolving parent POMs. <strong>Workaround:</strong> Serve your local Maven cache via HTTP: <code style="color:var(--accent)">cd ~/.m2/repository && python3 -m http.server 8080</code>, then run <code style="color:var(--accent)">osv-scanner scan -r . --maven-registry http://localhost:8080</code>. See <a href="https://github.com/google/osv-scanner/issues/2918" target="_blank" rel="noopener noreferrer" style="color:#ffb89a;text-decoration:underline">issue #2918</a>.
+        OSS scanner runs on push — no Veracode account needed.<br>Check the <strong style="color:var(--text)">Actions</strong> tab in your fork.<br><br>
+        <span style="color:var(--accent)">JS &nbsp;&nbsp;</span> npm audit<br>
+        <span style="color:var(--accent)">PY &nbsp;&nbsp;</span> pip-audit<br>
+        <span style="color:var(--accent)">Java </span> dependency-check
       </div>
     </div>
  
@@ -1090,7 +1225,7 @@
         style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;background:var(--surface);color:var(--text);font-family:var(--mono);font-size:12px;margin-bottom:8px"
         oninput="updateAlias()">
       <div id="alias-display" style="font-family:var(--mono);font-size:13px;color:var(--accent);padding:8px 10px;border-radius:5px;background:var(--accent-dim);border:1px solid rgba(91,138,255,0.2);text-align:center;display:none">
-        -
+        —
       </div>
       <div style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:8px;line-height:1.5;text-align:center">
         Enter your GitHub username to see your leaderboard alias
@@ -1100,9 +1235,9 @@
     <div class="sidebar-widget">
       <div class="widget-title">Need Help?</div>
       <div style="font-size:13px;color:var(--muted);line-height:1.7">
-        🙋 Raise your hand<br>
-        💬 Slack: <span style="font-family:var(--mono);color:var(--accent)">#wad-workshop</span><br>
-        📖 Hint sheet: row A handout
+        Raise your hand at the booth<br>
+        Patrick or Boy can help<br><br>
+        <a href="hint-sheet.html" target="_blank" style="color:var(--accent);text-decoration:none">📋 Hint sheet (printable)</a>
       </div>
     </div>
  
@@ -1111,8 +1246,8 @@
  
 <script>
   let currentPhase = 0;
-  const progressLabels = ['Act 1 of 4', 'Act 2 of 4', 'Act 3 of 4', 'Resources'];
-  const progressWidths = ['25%', '50%', '75%', '100%'];
+  const progressLabels = ['Presentation', 'Act 1 of 3', 'Act 2 of 3', 'Act 3 of 3', 'Resources'];
+  const progressWidths = ['20%', '40%', '60%', '80%', '100%'];
  
   function showPhase(n) {
     // Update timeline
@@ -1130,7 +1265,7 @@
     document.getElementById('progress-label').textContent = progressLabels[n];
  
     // Show scan widget during exercise
-    document.getElementById('scan-widget').style.display = (n === 1) ? 'block' : 'none';
+    document.getElementById('scan-widget').style.display = (n === 2) ? 'block' : 'none';
  
     currentPhase = n;
   }
@@ -1172,13 +1307,13 @@
  
     setTimeout(() => {
       if (!scanRun) {
-        // First scan, still vulnerable
+        // First scan - still vulnerable
         document.getElementById('scan-count').textContent = '8 findings';
         btn.textContent = 'Re-Scan';
         btn.disabled = false;
         scanRun = true;
       } else {
-        // Second scan, clean
+        // Second scan - clean
         const box = document.getElementById('scan-status-box');
         box.classList.add('pass');
         box.querySelector('.status-dot').style.background = 'var(--green)';
@@ -1201,21 +1336,6 @@
         btn.classList.remove('copied');
       }, 1800);
     });
-  }
-
-  /**
-   * Encode String to HTML encoded String.
-   *
-   * Use TextNode to let browser do encoding.
-   * Copied from: https://docs.veracode.com
-   * @param {string} value String to encode
-   * @returns {string} Encoded string
-   */
-  function vcEncodeHtml(value) {
-    var text = document.createTextNode(value);
-    var p = document.createElement('p');
-    p.appendChild(text);
-    return p.innerHTML;
   }
 
   // Fetch and display leaderboard from GitHub Pages
@@ -1244,9 +1364,9 @@
 
       container.innerHTML = top3.map((entry, i) => `
         <div class="leaderboard-row">
-          <div class="rank ${rankClasses[i]}">${vcEncodeHtml(String(entry.rank))}</div>
-          <div class="lb-name" title="Repos: ${vcEncodeHtml(entry.repos.join(', '))}">${vcEncodeHtml(entry.participant_alias)}</div>
-          <div class="lb-score" title="Repos: ${vcEncodeHtml(entry.repos.join(', '))}">${vcEncodeHtml(String(entry.total_score))}</div>
+          <div class="rank ${rankClasses[i]}">${entry.rank}</div>
+          <div class="lb-name" title="Repos: ${entry.repos.join(', ')}">${entry.participant_alias}</div>
+          <div class="lb-score" title="Repos: ${entry.repos.join(', ')}">${entry.total_score}</div>
           <div class="lb-badge">${medals[i]}</div>
         </div>
       `).join('');
